@@ -28,8 +28,14 @@
           <a href="#!" class="pc-link"><span class="pc-micon"><i class="ti ti-key"></i></span><span
               class="pc-mtext">User Pages</span><span class="pc-arrow"><i class="ti ti-chevron-right"></i></span></a>
           <ul class="pc-submenu">
-            <li class="pc-item"><a class="pc-link" href="{{ url_for('authentication_blueprint.login') }}">Login</a></li>
-            <li class="pc-item"><a class="pc-link" href="{{ url_for('authentication_blueprint.register') }}">Register</a></li>
+
+            {% if current_user.is_authenticated %}
+              <li class="pc-item"><a class="pc-link" href="{{ url_for('authentication_blueprint.logout') }}">Login</a></li>
+            {% else %}
+              <li class="pc-item"><a class="pc-link" href="{{ url_for('authentication_blueprint.login') }}">Login</a></li>
+              <li class="pc-item"><a class="pc-link" href="{{ url_for('authentication_blueprint.register') }}">Register</a></li>
+            {% endif %}
+
           </ul>
         </li>
         <li class="pc-item pc-caption">
