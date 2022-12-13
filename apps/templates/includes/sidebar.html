@@ -28,8 +28,8 @@
           <a href="#!" class="pc-link"><span class="pc-micon"><i class="ti ti-key"></i></span><span
               class="pc-mtext">User Pages</span><span class="pc-arrow"><i class="ti ti-chevron-right"></i></span></a>
           <ul class="pc-submenu">
-            <li class="pc-item"><a class="pc-link" href="{{ url_for('login') }}">Login</a></li>
-            <li class="pc-item"><a class="pc-link" href="{{ url_for('register') }}">Register</a></li>
+            <li class="pc-item"><a class="pc-link" href="{{ url_for('authentication_blueprint.login') }}">Login</a></li>
+            <li class="pc-item"><a class="pc-link" href="{{ url_for('authentication_blueprint.register') }}">Register</a></li>
           </ul>
         </li>
         <li class="pc-item pc-caption">
@@ -37,15 +37,15 @@
           <i class="ti ti-apps"></i>
         </li>
         <li class="pc-item">
-          <a href="{{ url_for('typography') }}" class="pc-link"><span class="pc-micon"><i
+          <a href="{{ url_for('home_blueprint.typography') }}" class="pc-link"><span class="pc-micon"><i
                 class="ti ti-typography"></i></span><span class="pc-mtext">Typography</span></a>
         </li>
         <li class="pc-item">
-          <a href="{{ url_for('color') }}" class="pc-link"><span class="pc-micon"><i class="ti ti-brush"></i></span><span
+          <a href="{{ url_for('home_blueprint.color') }}" class="pc-link"><span class="pc-micon"><i class="ti ti-brush"></i></span><span
               class="pc-mtext">Color</span></a>
         </li>
         <li class="pc-item">
-          <a href="{{ url_for('icon_tabler') }}" class="pc-link"><span class="pc-micon"><i
+          <a href="{{ url_for('home_blueprint.icon_tabler') }}" class="pc-link"><span class="pc-micon"><i
                 class="ti ti-plant-2"></i></span><span class="pc-mtext">Tabler</span><span class="pc-arrow"></a>
         </li>
 
@@ -54,7 +54,7 @@
           <i class="ti ti-brand-chrome"></i>
         </li>
         <li class="pc-item">
-          <a href="{{ url_for('sample_page') }}" class="pc-link"><span class="pc-micon"><i
+          <a href="{{ url_for('home_blueprint.sample_page') }}" class="pc-link"><span class="pc-micon"><i
                 class="ti ti-brand-chrome"></i></span><span class="pc-mtext">Sample page</span></a></li>
         <li class="pc-item">
           <a href="https://github.com/app-generator/django-admin-berry" target="_blank" class="pc-link"><span

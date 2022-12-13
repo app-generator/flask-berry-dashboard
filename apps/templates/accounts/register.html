@@ -25,28 +25,37 @@
             <div class="saprator mt-3">
               <span>or</span>
             </div>
-            <h5 class="my-4 d-flex justify-content-center">Sign Up with Email address</h5>
-            <form method="post">
+            <h5 class="my-4 d-flex justify-content-center">
+              
+              {% if msg %}
+                <span class="text-danger">
+                  {{ msg | safe }}
+                </span>
+              {% else %}
+                Add your credentials
+              {% endif %} 
+
+            </h5>
+
+            <form role="form" method="post" action="">
+
+              {{ form.hidden_tag() }}
+
+
               <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                   <div class="form-floating mb-3">
-                    <input type="email" class="form-control" id="floatingInput" placeholder="First Name" />
-                    <label for="floatingInput">First Name</label>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-floating mb-3">
-                    <input type="email" class="form-control" id="floatingInput" placeholder="Last Name" />
+                    {{ form.username(placeholder="Username", class="form-control") }}
                     <label for="floatingInput">Last Name</label>
                   </div>
                 </div>
               </div>
               <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="floatingInput" placeholder="Email Address / Username" />
+                {{ form.email(placeholder="Email", class="input form-control", type="email") }}
                 <label for="floatingInput">Email Address / Username</label>
               </div>
               <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="floatingInput" placeholder="Password" />
+                {{ form.password(placeholder="Password", class="form-control", type="password") }}
                 <label for="floatingInput">Password</label>
               </div>
               <div class="form-check mt-3s">
@@ -56,12 +65,13 @@
                 </label>
               </div>
               <div class="d-grid mt-4">
-                <button type="submit" class="btn btn-secondary p-2">Sign Up</button>
+                <button type="submit" name="register" class="btn btn-secondary p-2">Sign Up</button>
               </div>
             </form>
+
             <hr />
             <h5 class="d-flex justify-content-center">Already have an account? 
-              <a class="ms-2" href="{{ url_for('login') }}">Login</a>
+              <a class="ms-2" href="{{ url_for('authentication_blueprint.login') }}">Login</a>
             </h5>
           </div>
         </div>

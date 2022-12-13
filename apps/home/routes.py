@@ -13,8 +13,47 @@ from jinja2 import TemplateNotFound
 @login_required
 def index():
 
-    return render_template('home/index.html', segment='index')
+    return render_template('pages/index.html', segment='index')
 
+@blueprint.route('/typography')
+def typography():
+    return render_template('pages/typography.html')
+
+@blueprint.route('/color')
+def color():
+    return render_template('pages/color.html')
+
+@blueprint.route('/icon-tabler')
+def icon_tabler():
+    return render_template('pages/icon-tabler.html')
+
+@blueprint.route('/sample-page')
+def sample_page():
+    return render_template('pages/sample-page.html')  
+
+@blueprint.route('/accounts/password-reset/')
+def password_reset():
+    return render_template('accounts/password_reset.html')
+
+@blueprint.route('/accounts/password-reset-done/')
+def password_reset_done():
+    return render_template('accounts/password_reset_done.html')
+
+@blueprint.route('/accounts/password-reset-confirm/')
+def password_reset_confirm():
+    return render_template('accounts/password_reset_confirm.html')
+
+@blueprint.route('/accounts/password-reset-complete/')
+def password_reset_complete():
+    return render_template('accounts/password_reset_complete.html')
+
+@blueprint.route('/accounts/password-change/')
+def password_change():
+    return render_template('accounts/password_change.html')
+
+@blueprint.route('/accounts/password-change-done/')
+def password_change_done():
+    return render_template('accounts/password_change_done.html')
 
 @blueprint.route('/<template>')
 @login_required

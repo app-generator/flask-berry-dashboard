@@ -27,14 +27,28 @@
             <div class="saprator mt-3">
               <span>or</span>
             </div>
-            <h5 class="my-4 d-flex justify-content-center">Sign in with Email address</h5>
-            <form method="post">
+            <h5 class="my-4 d-flex justify-content-center">
+
+              {% if msg %}
+                <span class="text-danger">
+                  {{ msg | safe }}
+                </span>
+              {% else %}
+                Add your credentials
+              {% endif %} 
+
+            </h5>
+            
+            <form role="form" method="post" action="">
+
+              {{ form.hidden_tag() }}
+
               <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="floatingInput" placeholder="Email address / Username" />
+                {{ form.username(placeholder="Username", class="form-control") }}
                 <label for="floatingInput">Email address / Username</label>
               </div>
               <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="floatingInput" placeholder="Password" />
+                {{ form.password(placeholder="Password", class="form-control", type="password") }}
                 <label for="floatingInput">Password</label>
               </div>
               <div class="d-flex mt-1 justify-content-between">
@@ -43,16 +57,16 @@
                   <label class="form-check-label text-muted" for="customCheckc1">Remember me</label>
                 </div>
                 <h5 class="text-secondary">
-                  <a href="{{ url_for('password_reset') }}">Forgot Password?</a>
+                  <a href="{{ url_for('home_blueprint.password_reset') }}">Forgot Password?</a>
                 </h5>
               </div>
               <div class="d-grid mt-4">
-                <button type="submit" class="btn btn-secondary">Sign In</button>
+                <button type="submit" name="login" class="btn btn-secondary">Sign In</button>
               </div>
             </form>
             <hr />
             <h5 class="d-flex justify-content-center">Don't have an account?
-              <a class="ms-2" href="{{ url_for('register') }}">Register</a>
+              <a class="ms-2" href="{{ url_for('authentication_blueprint.register') }}">Register</a>
             </h5>
           </div>
         </div>
