@@ -1,6 +1,6 @@
 # [Flask Berry Bootstrap 5](https://github.com/app-generator/flask-berry-dashboard)
 
-Open-source **Flask/Jinja** project crafted on top of **Berry Dashboard**, an open-source `Boostrap 5` design from [CodedThemes](https://codedthemes.com/?ref=appseed)
+Open-source **Flask Dashboard** project crafted on top of **Berry**, an open-source `Boostrap 5` design from [CodedThemes](https://codedthemes.com/?ref=appseed)
 The product is designed to deliver the best possible user experience with highly customizable feature-rich pages. `Berry` has easy and intuitive responsive design whether it is viewed on retina screens or laptops.
 
 <br />
@@ -25,7 +25,7 @@ The product is designed to deliver the best possible user experience with highly
 
 ## ✨ Start the app in Docker
 
-> **Step 1** - Download the code from the GH repository (using `GIT`) 
+> 👉 **Step 1** - Download the code from the GH repository (using `GIT`) 
 
 ```bash
 $ # Get the code
@@ -35,7 +35,7 @@ $ cd flask-berry-dashboard
 
 <br />
 
-> **Step 2** - Edit `.env` and set `DEBUG=True`. This will activate the `SQLite` persistance. 
+> 👉 **Step 2** - Edit `.env` and set `DEBUG=True`. This will activate the `SQLite` persistance. 
 
 ```txt
 DEBUG=True
@@ -43,7 +43,7 @@ DEBUG=True
 
 <br />
 
-> **Step 3** - Start the APP in `Docker`
+> 👉 **Step 3** - Start the APP in `Docker`
 
 ```bash
 $ docker-compose up --build 
@@ -52,7 +52,6 @@ $ docker-compose up --build
 Visit `http://localhost:5085` in your browser. The app should be up & running.
 
 <br />
-
 
 ## ✨ How to use it
 
