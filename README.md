@@ -177,13 +177,13 @@ The project has a simple, intuitive structure presented bellow:
 
 <br />
 
-> [Flask/Jinja Berry](https://github.com/app-generator/jinja-berry-dashboard) - `Icons` Page
+> [Flask Berry Bootstrap 5](https://github.com/app-generator/flask-berry-dashboard) - `Icons` Page
 
 ![Berry Bootstrap 5 - UI Icons page, Open-source Starter by AppSeed](https://user-images.githubusercontent.com/51070104/207091655-d5005e08-7ea0-4367-ab3a-2cd16934d2fd.jpg)
 
 <br />
 
-> [Flask/Jinja Berry](https://github.com/app-generator/jinja-berry-dashboard) - `Colors` page
+> [Flask Berry Bootstrap 5](https://github.com/app-generator/flask-berry-dashboard) - `Colors` page
 
 ![Berry Bootstrap 5 - Colors page, Open-source Starter by AppSeed](https://user-images.githubusercontent.com/51070104/207091441-942be542-2794-4bdb-a51d-85c75b5bc692.jpg)
 
