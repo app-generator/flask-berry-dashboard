@@ -1,22 +1,31 @@
 {
-    "name": "generic-compilation-script",
-    "version": "1.0.0",
-    "description": "Generic Builder",
+    "name": "@themesberg/pixel-lite-bootstrap-ui-kit",
+    "version": "4.0.0",
+    "description": "Open-source Bootstrap 5 UI Kit",
     "main": "gulpfile.js",
-    "author": "AppSeed",
+    "author": "Themesberg",
     "keywords": [
+        "bootstrap",
+        "bootstrap 5",
+        "bootstrap 5 ui kit",
+        "bootstrap ui kit",
+        "ui kit",
+        "components",
+        "elements",
+        "responsive",
+        "front-end",
         "css",
         "sass",
         "gulp",
         "web"
     ],
-    "homepage": "https://appseed.us",
+    "homepage": "https://themesberg.com/product/ui-kit/pixel-free-bootstrap-5-ui-kit",
     "repository": {
         "type": "git",
-        "url": "https://github.com/app-generator"
+        "url": "https://github.com/themesberg/pixel-bootstrap-ui-kit"
     },
     "bugs": {
-        "email": "support@appseed.us"
+        "email": "support@themesberg.com"
     },
     "license": "MIT License",
     "devDependencies": {

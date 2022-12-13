@@ -1,0 +1,367 @@
+// ============================
+//     Sidebar css start
+// ============================
+
+.pc-sidebar {
+  background: $sidebar-background;
+  width: $sidebar-width;
+  position: fixed;
+  top: $header-height;
+  bottom: 0;
+  z-index: 1026;
+  overflow: hidden;
+  .navbar-wrapper {
+    width: $sidebar-width;
+    background: inherit;
+  }
+  ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+  }
+  .pc-caption {
+    color: $sidebar-caption;
+    display: block;
+    padding: 24px 20px 10px !important;
+    text-transform: capitalize;
+    position: relative;
+    i {
+      display: none;
+    }
+    &:not(:first-child) {
+      &:after {
+        content: "";
+        position: absolute;
+        top: 5px;
+        left: 20px;
+        width: calc(100% - 40px);
+        height: 1px;
+        border-top: 1px solid #eee;
+      }
+    }
+
+    font: {
+      size: 14px;
+      weight: 500;
+    }
+
+    label {
+      margin-bottom: 0;
+    }
+
+    span:not(.badge) {
+      display: block;
+      color: #67758a;
+
+      font: {
+        size: 14px;
+        weight: 500;
+      }
+    }
+  }
+  .pc-micon {
+    margin-right: 15px;
+    height: 24px;
+    display: inline-block;
+    vertical-align: middle;
+
+    i {
+      font-size: 18px;
+
+      &.material-icons-two-tone {
+        font-size: 22px;
+        display: inline-block;
+      }
+    }
+
+    > svg {
+      width: 18px;
+      height: 18px;
+      fill: rgba(114, 103, 239, 0.2);
+    }
+  }
+  .pc-link {
+    display: block;
+    padding: 11px 20px;
+    color: $sidebar-color;
+    border-radius: 8px;
+
+    font: {
+      size: 14px;
+      weight: 400;
+    }
+
+    &:active,
+    &:focus,
+    &:hover {
+      text-decoration: none;
+      color: $sidebar-active-color;
+
+      .pc-micon {
+        i,
+        svg {
+          color: $sidebar-active-color;
+        }
+      }
+    }
+  }
+  .pc-item {
+    padding-bottom: 2px;
+    > .pc-link {
+      margin-left: 16px;
+      margin-right: 16px;
+    }
+    &.disabled {
+      a {
+        cursor: not-allowed;
+        user-select: none;
+      }
+    }
+    &.active,
+    &:focus,
+    &:hover {
+      > .pc-link {
+        color: $sidebar-active-color;
+
+        .pc-micon {
+          i,
+          svg {
+            color: $sidebar-active-color;
+          }
+        }
+      }
+    }
+  }
+  .pc-arrow {
+    float: right;
+    display: inline-block;
+    transition: all 0.2s ease-in-out;
+
+    > svg {
+      width: 14px;
+      height: 14px;
+    }
+  }
+  .pc-badge {
+    margin-left: 8px;
+  }
+  .pc-navbar-card {
+    position: relative;
+    overflow: hidden;
+    padding: 24px;
+    margin: 20px;
+
+    &::before {
+      border: 3px solid;
+      top: 145px;
+      right: -70px;
+    }
+
+    &::after {
+      border: 19px solid;
+      top: 65px;
+      right: -150px;
+    }
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      border-color: rgba(255, 255, 255, 0.5);
+      border-radius: 50%;
+      width: 200px;
+      height: 200px;
+    }
+  }
+  .m-header {
+    height: $header-height;
+    display: flex;
+    align-items: center;
+    padding: 16px 24px;
+
+    .logo-sm {
+      display: none;
+    }
+  }
+  .navbar-content {
+    position: relative;
+    height: calc(100vh - #{$header-height});
+    padding: 10px 0;
+  }
+  .pc-submenu {
+    .pc-link {
+      padding: 10px 30px 10px 55px;
+    }
+
+    .pc-submenu {
+      .pc-link {
+        padding: 10px 30px 10px 75px;
+      }
+
+      .pc-submenu {
+        .pc-link {
+          padding: 10px 30px 10px 95px;
+        }
+      }
+    }
+  }
+  .pc-submenu {
+    position: relative;
+
+    .pc-item {
+      position: relative;
+
+      &:before {
+        content: "";
+        position: absolute;
+        left: 55px;
+        top: 17px;
+        z-index: 1;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        transition: 0.35s cubic-bezier(0.54, 1.6, 0.5, 1);
+      }
+
+      &:hover,
+      &.active {
+        &:before {
+          background: $secondary;
+          transform: scale(1.25);
+        }
+      }
+    }
+
+    .pc-submenu {
+      > .pc-item {
+        &:before {
+          left: 75px;
+        }
+      }
+
+      .pc-submenu {
+        > .pc-item {
+          &:before {
+            left: 95px;
+          }
+        }
+      }
+    }
+  }
+  .pc-navbar {
+    > li {
+      > .pc-submenu {
+        &::before {
+          content: "";
+          position: absolute;
+          left: 40px;
+          top: 0;
+          z-index: 1;
+          width: 1px;
+          height: 100%;
+          border-radius: 2px;
+          background: shift-color($primary, $soft-bg-level);
+        }
+      }
+    }
+    > .pc-item {
+      &.active,
+      &:focus,
+      &:hover {
+        > .pc-link {
+          background: shift-color($sidebar-active-color, $soft-bg-level);
+          color: $sidebar-active-color;
+          i {
+            color: $sidebar-active-color;
+          }
+        }
+      }
+    }
+  }
+
+  .pc-hasmenu {
+    &.pc-trigger {
+      > .pc-submenu {
+        display: block;
+      }
+
+      > .pc-link {
+        > .pc-arrow {
+          transform: rotate(90deg);
+        }
+      }
+    }
+  }
+}
+
+.pc-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+@media (min-width: 1025px) {
+  .navbar-overlay {
+    .pc-sidebar {
+      &.pc-over-menu-active {
+        .navbar-wrapper {
+          position: relative;
+          z-index: 5;
+        }
+      }
+
+      &:not(.pc-over-menu-active) {
+        left: -#{$sidebar-width};
+        box-shadow: none;
+      }
+    }
+  }
+  .pc-sidebar {
+    transition: width 0.15s ease;
+    .m-header {
+      display: none;
+    }
+    ~ .pc-container {
+      transition: margin-left 0.15s ease;
+    }
+    &.pc-sidebar-hide {
+      // transform: translateX(-#{$sidebar-width});
+      width: 0;
+      ~ .pc-container {
+        margin-left: 20px;
+      }
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .pc-sidebar {
+    left: -#{$sidebar-width};
+    box-shadow: none;
+    top: 0;
+    transition: all 0.15s ease-in-out;
+
+    &.mob-sidebar-active {
+      left: 0;
+      box-shadow: $sidebar-shadow;
+
+      .navbar-wrapper {
+        position: relative;
+        z-index: 5;
+        background: inherit;
+      }
+    }
+  }
+
+  .minimenu {
+    .pc-container {
+      margin-left: 0;
+    }
+  }
+}
+
+// Sidebar css end

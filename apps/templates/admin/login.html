@@ -1,0 +1,84 @@
+{% extends 'layouts/auth_base.html' %}
+{% load i18n static admin_berry %}
+
+{% block title %} Login {% endblock title %}
+
+{% block content %}
+  <div class="auth-main">
+    <div class="auth-wrapper v3">
+      <div class="auth-form">
+        <div class="card my-5">
+          <div class="card-body">
+            <a href="#" class="d-flex justify-content-center">
+              <img src="{% static 'assets/images/logo-dark.svg' %}" />
+            </a>
+            <div class="row">
+              <div class="d-flex justify-content-center">
+                <div class="auth-header">
+                  <h2 class="text-secondary mt-5"><b>Hi, Welcome Back</b></h2>
+                  <p class="f-16 mt-2">Enter your credentials to continue</p>
+                </div>
+              </div>
+            </div>
+            <h5 class="my-4 d-flex justify-content-center">Sign in with Email address</h5>
+            <form method="post">
+              {% csrf_token %}
+
+              {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                  <span class="text-danger">{{ error }}</span>
+                {% endfor %}
+              {% endif %}
+
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control form-control-lg" id="{{ form.username.id_for_label }}" name="{{ form.username.name }}" placeholder="Username">
+                <label for="floatingInput">Username</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="password" class="form-control form-control-lg" name="{{ form.password.name }}" id="{{ form.password.id_for_label }}" placeholder="Password">
+                <label for="floatingInput">Password</label>
+              </div>
+              <div class="d-grid mt-4">
+                <button type="submit" class="btn btn-secondary">Sign In</button>
+              </div>
+            </form>
+            <hr />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+
+
+{% block extra_js %}
+<script type="application/javascript">
+    {% if form.username.errors %}
+        notification.danger("{{ form.username.errors }}", 'top', 'right');
+    {% endif %}
+    {% if form.password.errors %}
+        notification.danger("{{ form.password.errors }}", 'top', 'right');
+    {% endif %}
+
+    {% if user.is_authenticated %}
+        var msg = "You are authenticated as {{ username }}, but are not authorized to " +
+            "access this page.Would you like to login to a different account ?"
+        notification.warning(msg, 'top', 'right');
+    {% endif %}
+
+    {% if form.errors and not form.non_field_errors %}
+        {% if form.errors.items|length == 1 %}
+            notification.warning("{% trans "Please correct the error below." %}", 'top', 'right');
+        {% else %}
+            notification.warning("{% trans "Please correct the errors below." %}", 'top', 'right');
+        {% endif %}
+    {% endif %}
+
+    {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+            notification.warning("{{ error|clean_text }}", 'top', 'right');
+        {% endfor %}
+    {% endif %}
+</script>
+{% endblock %}

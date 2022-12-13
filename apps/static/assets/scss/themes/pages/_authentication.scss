@@ -1,0 +1,499 @@
+.auth-main {
+    position: relative;
+
+    .auth-wrapper {
+        height: 100%;
+        width: 100%;
+        min-height: 100vh;
+
+        .saprator {
+            position: relative;
+            display: flex;
+            align-self: center;
+            justify-content: center;
+
+            &:after {
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: 0;
+                width: 100%;
+                height: 1px;
+                background: $border-color;
+                z-index: 1;
+            }
+
+            span {
+                font-size: 0.875rem;
+                padding: 20px 70px;
+                background: #fff;
+                z-index: 5;
+                text-transform: uppercase;
+                color: $headings-color;
+                font-weight: 500;
+                outline: 1px solid $border-color;
+                outline-offset: -16px;
+                border-radius: 10px;
+            }
+        }
+        .auth-sidecontent {
+            overflow: hidden;
+        }
+        &.v2 {
+            display: flex;
+            align-items: center;
+
+            .logo {
+                width: 100%;
+                padding: 24px;
+                position: absolute;
+                top: 0;
+                left: 0;
+                + .card {
+                    margin-top: 80px;
+                }
+            }
+            .auth-form {
+                flex-direction: column;
+            }
+
+            .auth-sidecontent {
+                width: 500px;
+                align-self: stretch;
+                display: flex;
+                align-items: center;
+                position: relative;
+                background: shift-color($primary, $soft-bg-level);
+                @media (max-width: 991.98px) { display: none; }
+
+                & > * {
+                    position: relative;
+                    z-index: 5;
+                }
+
+                &::after {
+                    content: "";
+                    background-image: url('../images/authentication/auth2-login.svg');
+                    background-repeat: no-repeat;
+                    background-position: bottom;
+                    z-index: 1;
+                    position: absolute;
+                    top: 0;
+                    bottom: 0px;
+                    left: 0;
+                    right: 0;
+                    opacity: 0.1;
+                }
+
+                .carousel {
+                    position: relative;
+                    top: 25px;
+                }
+            }
+        }
+
+        &.v1 {
+            display: flex;
+            align-items: center;
+
+            .auth-form {
+                background: shift-color($primary, $soft-bg-level);
+                min-height: 100vh;
+                padding: 24px;
+            }
+
+            .auth-sidecontent {
+                width: 500px;
+                align-self: stretch;
+                display: flex;
+                align-items: center;
+                position: relative;
+                @media (max-width: 991.98px) { display: none; }
+
+                & > * {
+                    position: relative;
+                    z-index: 5;
+                }
+
+                &::after {
+                    content: "";
+                    background-image: url('../images/authentication/auth2-login.svg');
+                    background-repeat: no-repeat;
+                    background-position: bottom;
+                    z-index: 1;
+                    position: absolute;
+                    top: 0;
+                    bottom: 0px;
+                    left: 0;
+                    right: 0;
+                    opacity: 0.1;
+                }
+
+                .animation-content {
+                    position: relative;
+
+                    .blue-card {
+                        position: absolute;
+                        animation: 15s ease-in-out 1s infinite normal none running wings;
+                        left: 10%;
+                        width: 330px;
+                        height: 270px;
+                    }
+
+                    .purple-card {
+                        position: relative;
+                        animation: 15s ease-in-out 0s infinite normal none running wings;
+                        left: 10%;
+                        top: 100px;
+                        height: 280px;
+                    }
+
+                    .signup-blue-card {
+                        position: relative;
+                        animation: 15s ease-in-out 1s infinite normal none running wings;
+                        width: 400px;
+                        top: 40px;
+                    }
+
+                    .signup-white-card {
+                        position: absolute;
+                        animation: 15s ease-in-out 0s infinite normal none running wings;
+                        left: 25%;
+                        top: 50%;
+                        max-width: 100%;
+                    }
+
+                    .multi-card {
+                        position: relative;
+                        animation: 15s ease-in-out 1s infinite normal none running wings;
+                        top: 100px;
+                    }
+
+                    .mail-card {
+                        position: relative;
+                        animation: 15s ease-in-out 1s infinite normal none running wings;
+                        top: 100px;
+                    }
+
+                    .reset-error-card {
+                        position: absolute;
+                        animation: 15s ease-in-out 1s infinite normal none running wings;
+                        height: 270px;
+                        top: 30px;
+                    }
+
+                    .reset-purple-card {
+                        position: relative;
+                        animation: 15s ease-in-out 0s infinite normal none running wings;
+                        width: 360px;
+                        height: 400px;
+                        top: 140px;
+                        left: 15%;
+                    }
+                }
+
+                .carousel {
+                    position: relative;
+                    top: 25px;
+                }
+            }
+        }
+
+        &.v3 {
+            display: flex;
+            align-items: center;
+
+            .auth-form {
+                background: shift-color($primary, $soft-bg-level);
+                min-height: 100vh;
+                padding: 24px;
+            }
+        }
+        .auth-form {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+
+            .card {
+                width: 100%;
+                max-width: 480px;
+                box-shadow: none;
+            }
+
+            img {
+                padding-right: 15px;
+            }
+
+            h5 {
+                span {
+                    text-decoration: underline;
+                }
+            }
+        }
+
+        .auth-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}
+.maintenance-block {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.error-card {
+    box-shadow: none;
+    text-align: center;
+    .error-image-block {
+        position: relative;
+        text-align: center;
+        display: inline-flex;
+
+        .img-404 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            &.error-text {
+                animation: 3s ease-in-out 0s infinite normal none running bounce;
+            }
+            &.error-primary {
+                animation: 15s ease-in-out 0s infinite normal none running wings;
+            }
+            &.error-secondary {
+                animation: 12s ease-in-out 0s infinite normal none running wings;
+            }
+        }
+    }
+}
+
+.construction-card {
+    text-align: center;
+    .construction-image-block {
+        position: relative;
+        display: inline-flex;
+        .img-block {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            animation: 10s ease-in-out 0s infinite normal none running blink;
+        }
+
+        .img-main {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            animation: 5s ease-in-out 0s infinite normal none running bounce;
+        }
+    }
+}
+.soon-card {
+    text-align: center;
+    .soon-image-block {
+        position: relative;
+        display: inline-block;
+        .img-soon {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            &.soon-box {
+                animation: blink 5s ease-in-out infinite;
+            }
+            &.soon-secondary,
+            &.soon-primary {
+                animation: wings 5s ease-in-out infinite;
+            }
+            &.soon-secondary {
+                animation-delay: 2s;
+            }
+        }
+    }
+}
+.commingsoon-wrapper {
+    display: flex;
+    align-items: center;
+    .sideanimation-block {
+        position: relative;
+        .img-bg-ring {
+            height: 100vh;
+        }
+        .img-bg-logo {
+            position: absolute;
+            top: 40px;
+            left: 40px;
+        }
+        .img-comming {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            &.img-bg-1,
+            &.img-bg-2 {
+                animation: blink 5s ease-in-out infinite;
+            }
+            &.img-bg-2 {
+                animation-delay: 1.5s;
+            }
+            &.img-widget {
+                animation: wings 5s ease-in-out infinite;
+                &.img-widget1 {
+                    animation-delay: 1s;
+                }
+                &.img-widget2 {
+                    animation-delay: 2s;
+                }
+                &.img-widget3 {
+                    animation-delay: 3s;
+                }
+                &.img-widget4 {
+                    animation-delay: 4s;
+                }
+                &.img-widget5 {
+                    animation-delay: 5s;
+                }
+            }
+        }
+    }
+    .content-block {
+        flex: 1 1 auto;
+        width: 1%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .commingsoon-block {
+            max-width: 600px;
+        }
+        .cs-footer-text{
+            margin-top: 30px;
+            text-align: end;
+            .d-flex{
+                justify-content: flex-end;
+            }
+        }
+    }
+    .commingsoon-slider {
+        position: relative;
+        &::after {
+            content: "";
+            position: absolute;
+            top: -24px;
+            right: 0;
+            border-radius: var(--bs-border-radius);
+            width: calc(100% - 24px);
+            height: 100%;
+            background: rgba(var(--bs-primary-rgb), 0.1);
+            z-index: 1;
+        }
+        .carousel-inner {
+            position: relative;
+            overflow: hidden;
+            z-index: 9;
+            border-radius: var(--bs-border-radius);
+            margin-right: 24px;
+            margin-top: 24px;
+            width: calc(100% - 24px);
+            box-shadow: 0px 0px 50px rgba(33, 150, 243, 0.2);
+        }
+    }
+    @media (max-width: 1199.98px) {
+        flex-direction: column;
+        .sideanimation-block {
+            order: 2;
+            width: 100%;
+            position: static;
+            margin-top: -160px;
+            .bottom-img {
+                display: none;
+                // position: relative;
+            }
+        }
+        .content-block {
+            order: 1;
+            width: 100%;
+            margin-top: 100px;
+            .cs-footer-text{
+                margin-top: 50px;
+                text-align: center;
+                .d-flex{
+                    justify-content: center;
+                }
+            }
+        }
+    }
+    @media (max-width: 767.98px) {
+        .sideanimation-block {
+            .img-comm-ring-small {
+                height: auto;
+                width: 100%;
+            }
+        }
+    }
+}
+@media (max-width: 575.98px) {
+    .timer-block {
+        .avtar.avtar-xl {
+            width: 45px;
+            height: 45px;
+            font-size: 16px;
+        }
+    }
+}
+
+@keyframes wings {
+    50% {
+        transform: translateY(-40px);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes bounce {
+    0%,
+    20%,
+    53%,
+    to {
+        animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+        transform: translateZ(0);
+    }
+
+    40%,
+    43% {
+        animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+        transform: translate3d(0, -5px, 0);
+    }
+
+    70% {
+        animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+        transform: translate3d(0, -7px, 0);
+    }
+
+    80% {
+        transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+        transform: translateZ(0);
+    }
+
+    90% {
+        transform: translate3d(0, -2px, 0);
+    }
+}
