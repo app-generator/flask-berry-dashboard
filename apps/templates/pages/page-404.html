@@ -1,0 +1,43 @@
+{% extends 'layouts/auth_base.html' %}
+
+{% block title %} Error 404 {% endblock title %}
+
+{% block content %}
+  <div class="auth-main">
+    <div class="auth-wrapper v3">
+      <div class="auth-form">
+        <div class="card my-5">
+          <div class="card-body">
+            <a href="#" class="d-flex justify-content-center">
+              <img src="{{ url_for('static', filename='assets/images/logo-dark.svg') }}" />
+            </a>
+            <div class="row">
+              <div class="d-flex justify-content-center">
+                <div class="auth-header">
+                  <h2 class="text-secondary mt-5">
+                    <b>
+                      Error 404
+                    </b>
+                  </h2>
+                </div>
+              </div>
+            </div>
+            <h5 class="my-4 d-flex justify-content-center">
+                Page not found
+            </h5>
+            
+            <form role="form" action="/">
+              <div class="d-grid mt-4">
+                <a href="/" class="btn btn-secondary">HOME</a>
+              </div>
+            </form>
+            <hr />
+            <h5 class="d-flex justify-content-center">
+              If the problem persists, please contact support.
+            </h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
