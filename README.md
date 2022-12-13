@@ -10,7 +10,7 @@ The product is designed to deliver the best possible user experience with highly
 - ✅ `Up-to-date dependencies`
 - ✅ Database: `SQLite`, MySql
 - ✅ `DB Tools`: SQLAlchemy ORM, `Flask-Migrate`
-- ✅ `Authentication`, Session Based, `OAuth` via **Github**
+- ✅ `Authentication`, Session Based
 - ✅ `Dark Mode` (persistent)
 - ✅ Docker, `Flask-Minify` (page compression)
 - ✅ **UI Kit**: [Berry BS5](https://github.com/app-generator/cth-berry-bootstrap5) `v1.0.1` by CodedThemes
