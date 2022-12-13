@@ -1,5 +1,12 @@
 # Change Log
 
+## [1.0.0] 2020-12-13
+### Changes
+
+- Stable version
+- Gulp Tooling for SCSS 
+- Links updated
+
 ## [0.0.2] 2020-12-13
 ### Changes
 
