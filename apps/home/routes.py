@@ -8,11 +8,9 @@ from flask import render_template, request
 from flask_login import login_required
 from jinja2 import TemplateNotFound
 
-
 @blueprint.route('/index')
 @login_required
 def index():
-
     return render_template('pages/index.html', segment='index')
 
 @blueprint.route('/typography')
@@ -75,7 +73,6 @@ def route_template(template):
 
     except:
         return render_template('home/page-500.html'), 500
-
 
 # Helper - Extract current page name from request
 def get_segment(request):
