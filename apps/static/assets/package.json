@@ -1,51 +1,43 @@
 {
-    "name": "@themesberg/pixel-lite-bootstrap-ui-kit",
-    "version": "4.0.0",
-    "description": "Open-source Bootstrap 5 UI Kit",
-    "main": "gulpfile.js",
-    "author": "Themesberg",
-    "keywords": [
-        "bootstrap",
-        "bootstrap 5",
-        "bootstrap 5 ui kit",
-        "bootstrap ui kit",
-        "ui kit",
-        "components",
-        "elements",
-        "responsive",
-        "front-end",
-        "css",
-        "sass",
-        "gulp",
-        "web"
-    ],
-    "homepage": "https://themesberg.com/product/ui-kit/pixel-free-bootstrap-5-ui-kit",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/themesberg/pixel-bootstrap-ui-kit"
+    "name": "berry-free-bootstrap-admin-template",
+    "version": "1.0.0",
+    "description": "Berry Bootstrap 5 Admin Dashboard Template",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
     },
-    "bugs": {
-        "email": "support@themesberg.com"
-    },
-    "license": "MIT License",
+    "author": "CodedThemes",
+    "license": "MIT",
     "devDependencies": {
-        "browser-sync": "^2.27.4",
-        "del": "^6.0.0",
-        "gulp": "^4.0.2",
-        "gulp-autoprefixer": "^8.0.0",
-        "gulp-clean-css": "^4.3.0",
-        "gulp-cssbeautify": "^3.0.0",
-        "node-sass": "^6.0.1",
-        "gulp-file-include": "^2.3.0",
-        "gulp-header": "^2.0.9",
-        "gulp-htmlmin": "^5.0.1",
-        "gulp-npm-dist": "^1.0.3",
-        "gulp-plumber": "^1.2.1",
-        "gulp-rename": "^2.0.0",
-        "gulp-sass": "^5.0.0",
-        "gulp-sourcemaps": "^3.0.0",
-        "gulp-uglify": "^3.0.2",
-        "gulp-wait": "^0.0.2",
-        "merge-stream": "^2.0.0"
+      "@babel/core": "^7.2.2",
+      "@babel/preset-env": "^7.2.3",
+      "gulp": "^4.0.0",
+      "gulp-autoprefixer": "^6.0.0",
+      "gulp-babel": "^8.0.0-beta.2",
+      "gulp-cssbeautify": "^1.0.1",
+      "gulp-cssmin": "^0.2.0",
+      "gulp-htmlmin": "^5.0.1",
+      "gulp-inject": "^5.0.2",
+      "gulp-minify": "^3.1.0",
+      "gulp-sass": "^5.1.0",
+      "gulp-smushit": "^1.2.0",
+      "gulp-uglify": "^3.0.1",
+      "merge-stream": "^1.0.1",
+      "prettier": "2.7.1",
+      "sass": "^1.49.9"
+    },
+    "dependencies": {
+      "@popperjs/core": "^2.11.5",
+      "animate.css": "^3.7.0",
+      "apexcharts": "^3.6.9",
+      "bootstrap": "5.2.0-beta1",
+      "browser-sync": "^2.26.3",
+      "clipboard": "^2.0.8",
+      "del": "^6.1.1",
+      "gulp-file-include": "^2.0.1",
+      "gulp-sourcemaps": "^2.6.5",
+      "simplebar": "^5.3.8",
+      "wow.js": "^1.2.2"
     }
-}
+  }
+  
