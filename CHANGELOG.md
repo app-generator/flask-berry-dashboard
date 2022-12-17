@@ -1,5 +1,11 @@
 # Change Log
 
+## [1.0.1] 2020-12-17
+### Changes
+
+- DBMS silent fallback to SQLite:
+  - `.env` DBMS settings not good or not present
+
 ## [1.0.0] 2020-12-13
 ### Changes
 
