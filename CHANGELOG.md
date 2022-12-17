@@ -1,5 +1,11 @@
 # Change Log
 
+## [1.0.2] 2022-12-17
+### Improvements
+
+- Added descriptor for [LIVE Deployer](https://appseed.us/go-live/)
+  - Product can be deployed with `DnD`  
+
 ## [1.0.1] 2020-12-17
 ### Changes
 
