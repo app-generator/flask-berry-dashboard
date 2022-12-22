@@ -3,14 +3,19 @@
 Copyright (c) 2019 - present AppSeed.us
 """
 
-import os
+import os, random, string
 
 class Config(object):
 
     basedir = os.path.abspath(os.path.dirname(__file__))
 
     # Set up the App SECRET_KEY
-    SECRET_KEY  = os.getenv('SECRET_KEY', 'S#perS3crEt_007')
+    SECRET_KEY  = os.getenv('SECRET_KEY', None)
+    if not SECRET_KEY:
+        SECRET_KEY = ''.join(random.choice( string.ascii_lowercase  ) for i in range( 32 ))
+
+    # CDN Support Settings 
+    CDN_DOMAIN  = os.getenv('CDN_DOMAIN' , None)
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
