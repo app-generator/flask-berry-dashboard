@@ -17,10 +17,9 @@ The product is designed to deliver the best possible user experience with highly
   - Silent fallback to `SQLite`  
 - ✅ `DB Tools`: SQLAlchemy ORM, `Flask-Migrate`
 - ✅ `Authentication`, Session Based
-- ✅ Docker
+- ✅ `Docker`, Page Compression via `Flask-Minify`
 - 🚀 `Deployment` 
   - `CI/CD` flow via `Render`
-  - `Page Compression` via `Flask-Minify`
   - `CDN Support` (optional)   
 
 <br />
