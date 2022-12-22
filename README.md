@@ -11,10 +11,12 @@ The product is designed to deliver the best possible user experience with highly
 - ✅ Database: `SQLite`, MySql
 - ✅ `DB Tools`: SQLAlchemy ORM, `Flask-Migrate`
 - ✅ `Authentication`, Session Based
-- ✅ `Dark Mode` (persistent)
 - ✅ Docker, `Flask-Minify` (page compression)
 - ✅ **UI Kit**: [Berry BS5](https://github.com/app-generator/cth-berry-bootstrap5) `v1.0.1` by CodedThemes
   - `Persistent` **Dark-Mode**
+- 🚀 Compatible with [LIVE Deployer](https://appseed.us/go-live/)
+  - [Deploy Flask with Drag & Drop](https://www.youtube.com/watch?v=BzYH76xQOMw) - `video material`  
+  
 
 <br />
 
