@@ -35,7 +35,6 @@ The product is designed to deliver the best possible user experience with highly
 > 👉 **Step 1** - Download the code from the GH repository (using `GIT`) 
 
 ```bash
-$ # Get the code
 $ git clone https://github.com/app-generator/flask-berry-dashboard.git
 $ cd flask-berry-dashboard
 ```
@@ -57,7 +56,6 @@ Visit `http://localhost:5085` in your browser. The app should be up & running.
 > Download the code 
 
 ```bash
-$ # Get the code
 $ git clone https://github.com/app-generator/flask-berry-dashboard.git
 $ cd flask-berry-dashboard
 ```
