@@ -85,7 +85,7 @@ Edit `.env` using `env.sample` or simply export the variables in the `environmen
 - `DB credentials`
   - `Note`: if NOT provided, or wrong values, **SQLite is used**
   - `DB_ENGINE`, `DB_HOST`, `DB_NAME` ...
-- `CDN_DOMAIN`: deisabled by default
+- `CDN_DOMAIN`: disabled by default
   - Used only when `DEBUG=False` (production mode)   
  
 <br />
@@ -123,7 +123,7 @@ Edit `.env` using `env.sample` or simply export the variables in the `environmen
 - `DB credentials`
   - `Note`: if NOT provided, or wrong values, **SQLite is used**
   - `DB_ENGINE`, `DB_HOST`, `DB_NAME` ...
-- `CDN_DOMAIN`: deisabled by default
+- `CDN_DOMAIN`: disabled by default
   - Used only when `DEBUG=False` (production mode)  
 
 <br />
