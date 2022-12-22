@@ -11,15 +11,17 @@ The product is designed to deliver the best possible user experience with highly
 > Features
 
 - ✅ `Up-to-date dependencies`
-- ✅ Database: `SQLite`, MySql
+- ✅ `UI Kit`: Berry Bootstrap 5 by `CodedThemes`
+  - `Persistent` **Dark-Mode**
+- ✅ `Database`: `SQLite`, MySql
+  - Silent fallback to `SQLite`  
 - ✅ `DB Tools`: SQLAlchemy ORM, `Flask-Migrate`
 - ✅ `Authentication`, Session Based
-- ✅ Docker, `Flask-Minify` (page compression)
-- ✅ **UI Kit**: [Berry BS5](https://github.com/app-generator/cth-berry-bootstrap5) `v1.0.1` by CodedThemes
-  - `Persistent` **Dark-Mode**
-- 🚀 Compatible with [LIVE Deployer](https://appseed.us/go-live/)
-  - [Deploy Flask with Drag & Drop](https://www.youtube.com/watch?v=BzYH76xQOMw) - `video material`  
-  
+- ✅ Docker
+- 🚀 `Deployment` 
+  - `CI/CD` flow via `Render`
+  - `Page Compression` via `Flask-Minify`
+  - `CDN Support` (optional)   
 
 <br />
 
