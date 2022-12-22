@@ -1,5 +1,12 @@
 # Change Log
 
+## [1.0.3] 2022-12-22
+### Changes
+
+- Added CDN Support - ACTIVE When
+  - `DEBUG=False` in `.env` (production mode)
+  - `CDN_DOMAIN` is provided  
+
 ## [1.0.2] 2022-12-17
 ### Changes
 
