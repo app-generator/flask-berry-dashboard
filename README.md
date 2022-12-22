@@ -81,12 +81,17 @@ $ pip3 install -r requirements.txt
 
 > Set Up Flask Environment
 
-Edit `.env` or simply export the variables in the `environment`
+Edit `.env` using `env.sample` or simply export the variables in the `environment`. Here are the expected values: 
 
-```bash
-$ export FLASK_APP=run.py
-$ export FLASK_ENV=development
-```
+- `DEBUG`: controls the `Development`, `Production` mode
+  - Default `False` (production)
+- `FLASK_APP=run.py`: mandatory (APP entry point) 
+- `SECRET_KEY`: optional, random value used if not provided
+- `DB credentials`
+  - `Note`: if NOT provided, or wrong values, **SQLite is used**
+  - `DB_ENGINE`, `DB_HOST`, `DB_NAME` ...
+- `CDN_DOMAIN`: deisabled by default
+  - Used only when `DEBUG=False` (production mode)   
  
 <br />
 
@@ -114,15 +119,17 @@ $ pip3 install -r requirements.txt
 
 > Set Up Flask Environment
 
-```bash
-$ # CMD 
-$ set FLASK_APP=run.py
-$ set FLASK_ENV=development
-$
-$ # Powershell
-$ $env:FLASK_APP = ".\run.py"
-$ $env:FLASK_ENV = "development"
-```
+Edit `.env` using `env.sample` or simply export the variables in the `environment`. Here are the expected values: 
+
+- `DEBUG`: controls the `Development`, `Production` mode
+  - Default `False` (production)
+- `FLASK_APP=run.py`: mandatory (APP entry point) 
+- `SECRET_KEY`: optional, random value used if not provided
+- `DB credentials`
+  - `Note`: if NOT provided, or wrong values, **SQLite is used**
+  - `DB_ENGINE`, `DB_HOST`, `DB_NAME` ...
+- `CDN_DOMAIN`: deisabled by default
+  - Used only when `DEBUG=False` (production mode)  
 
 <br />
 
