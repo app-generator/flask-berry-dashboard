@@ -4,6 +4,7 @@ Open-source **Flask Dashboard** project crafted on top of **Berry**, an open-sou
 The product is designed to deliver the best possible user experience with highly customizable feature-rich pages. `Berry` has easy and intuitive responsive design whether it is viewed on retina screens or laptops.
 
 - 👉 [Flask Berry](https://flask-berry-dashboard.onrender.com) - `LIVE Demo`
+- ✅ [Flask Berry](https://youtu.be/rp-yuOJeNEs) - `Video presentation` (LIVE deployment included) 
 - 🚀 Free [Support](https://appseed.us/support/) via `Email` & `Discord`
 
 <br />
@@ -19,7 +20,7 @@ The product is designed to deliver the best possible user experience with highly
 - ✅ `Authentication`, Session Based
 - ✅ `Docker`, Page Compression via `Flask-Minify`
 - 🚀 `Deployment` 
-  - `CI/CD` flow via `Render`
+  - `CI/CD` flow via `Render` - [See Video](https://youtu.be/rp-yuOJeNEs)
   - `CDN Support` (optional)   
 
 <br />
