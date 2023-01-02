@@ -3,7 +3,7 @@
 Open-source **Flask Dashboard** project crafted on top of **Berry**, an open-source `Boostrap 5` design from [CodedThemes](https://codedthemes.com/?ref=appseed)
 The product is designed to deliver the best possible user experience with highly customizable feature-rich pages. `Berry` has easy and intuitive responsive design whether it is viewed on retina screens or laptops.
 
-- 👉 [Flask Berry](https://flask-berry-dashboard-lkrv.onrender.com) - `LIVE Demo`
+- 👉 [Flask Berry](https://flask-berry.onrender.com) - `LIVE Demo`
 - ✅ [Flask Berry](https://youtu.be/rp-yuOJeNEs) - `Video presentation` (LIVE deployment included) 
 - 🚀 Free [Support](https://appseed.us/support/) via `Email` & `Discord`
 
