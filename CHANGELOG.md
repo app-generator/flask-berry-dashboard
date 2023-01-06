@@ -1,5 +1,10 @@
 # Change Log
 
+## [1.0.6] 2023-01-06
+### Changes
+
+- Commit `.env`
+
 ## [1.0.5] 2022-12-22
 ### Changes
 
