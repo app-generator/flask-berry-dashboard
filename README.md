@@ -1,10 +1,10 @@
-# [Flask Berry Bootstrap 5](https://github.com/app-generator/flask-berry-dashboard)
+# [Flask Berry Bootstrap 5](https://appseed.us/product/berry-dashboard/flask/)
 
-Open-source **Flask Dashboard** project crafted on top of **Berry**, an open-source `Boostrap 5` design from [CodedThemes](https://codedthemes.com/?ref=appseed)
+Open-source **Flask Dashboard** project crafted on top of **[Berry](https://appseed.us/product/berry-dashboard/flask/)**, an open-source `Bootstrap 5` design from [CodedThemes](https://codedthemes.com/?ref=appseed)
 The product is designed to deliver the best possible user experience with highly customizable feature-rich pages. `Berry` has easy and intuitive responsive design whether it is viewed on retina screens or laptops.
 
+- 👉 [Flask Berry](https://appseed.us/product/berry-dashboard/flask/) - `Product page`
 - 👉 [Flask Berry](https://flask-berry.onrender.com) - `LIVE Demo`
-- ✅ [Flask Berry](https://youtu.be/rp-yuOJeNEs) - `Video presentation` (LIVE deployment included) 
 - 🚀 Free [Support](https://appseed.us/support/) via `Email` & `Discord`
 
 <br />
@@ -27,8 +27,7 @@ The product is designed to deliver the best possible user experience with highly
 
 ![Berry Bootstrap 5 - Dark-Mode ready, Open-source Template.](https://user-images.githubusercontent.com/51070104/207091062-e805b36c-663a-4a01-acb8-9c55ab914f4f.jpg)
 
-<br />
-
+<br /> 
 
 ## ✨ Start the app in Docker
 
@@ -195,4 +194,4 @@ The project has a simple, intuitive structure presented bellow:
 <br />
 
 ---
-[Flask Berry Bootstrap 5](https://github.com/app-generator/flask-berry-dashboard) - Minimal **Flask** starter provided by **[AppSeed](https://appseed.us/)**
+[Flask Berry Bootstrap 5](https://appseed.us/product/berry-dashboard/flask/) - Minimal **Flask** starter provided by **[AppSeed](https://appseed.us/)**
