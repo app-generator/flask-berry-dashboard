@@ -4,6 +4,7 @@
 ### Changes
 
 - Commit `.env`
+- Update Links (minor)
 
 ## [1.0.5] 2022-12-22
 ### Changes
