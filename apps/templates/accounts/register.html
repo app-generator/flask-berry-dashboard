@@ -29,7 +29,7 @@
             <h5 class="my-4 d-flex justify-content-center">
               
               {% if msg %}
-                <span class="text-danger">
+                <span>
                   {{ msg | safe }}
                 </span>
               {% else %}
@@ -38,42 +38,53 @@
 
             </h5>
 
-            <form role="form" method="post" action="">
+            {% if success %}
 
-              {{ form.hidden_tag() }}
+              <hr />
+              <h5 class="d-flex justify-content-center"> 
+                <a href="{{ url_for('authentication_blueprint.login') }}" class="btn btn-secondary p-2">Sign IN</a>
+              </h5>              
 
+            {% else %}
 
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="form-floating mb-3">
-                    {{ form.username(placeholder="Username", class="form-control") }}
-                    <label for="floatingInput">Username</label>
+              <form role="form" method="post" action="">
+
+                {{ form.hidden_tag() }} 
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-floating mb-3">
+                      {{ form.username(placeholder="Username", class="form-control") }}
+                      <label for="floatingInput">Username</label>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="form-floating mb-3">
-                {{ form.email(placeholder="Email", class="input form-control", type="email") }}
-                <label for="floatingInput">Email Address</label>
-              </div>
-              <div class="form-floating mb-3">
-                {{ form.password(placeholder="Password", class="form-control", type="password") }}
-                <label for="floatingInput">Password</label>
-              </div>
-              <div class="form-check mt-3s">
-                <input class="form-check-input input-primary" type="checkbox" id="customCheckc1" checked="" />
-                <label class="form-check-label" for="customCheckc1">
-                  <h5>Agree with <span>Terms & Condition.</span></h5>
-                </label>
-              </div>
-              <div class="d-grid mt-4">
-                <button type="submit" name="register" class="btn btn-secondary p-2">Sign Up</button>
-              </div>
-            </form>
+                <div class="form-floating mb-3">
+                  {{ form.email(placeholder="Email", class="input form-control", type="email") }}
+                  <label for="floatingInput">Email Address</label>
+                </div>
+                <div class="form-floating mb-3">
+                  {{ form.password(placeholder="Password", class="form-control", type="password") }}
+                  <label for="floatingInput">Password</label>
+                </div>
+                <div class="form-check mt-3s">
+                  <input class="form-check-input input-primary" type="checkbox" id="customCheckc1" checked="" />
+                  <label class="form-check-label" for="customCheckc1">
+                    <h5>Agree with <span>Terms & Condition.</span></h5>
+                  </label>
+                </div>
+                <div class="d-grid mt-4">
+                  <button type="submit" name="register" class="btn btn-secondary p-2">Sign Up</button>
+                </div>
+              </form>
 
-            <hr />
-            <h5 class="d-flex justify-content-center">Already have an account? 
-              <a class="ms-2" href="{{ url_for('authentication_blueprint.login') }}">Login</a>
-            </h5>
+              <hr />
+              <h5 class="d-flex justify-content-center">Already have an account? 
+                <a class="ms-2" href="{{ url_for('authentication_blueprint.login') }}">Login</a>
+              </h5>
+
+            {% endif %} 
+
           </div>
         </div>
       </div>
