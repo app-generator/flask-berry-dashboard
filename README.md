@@ -12,7 +12,7 @@ The product is designed to deliver the best possible user experience with highly
 > Features
 
 - ✅ `Up-to-date dependencies`
-- ✅ `UI Kit`: Berry Bootstrap 5 by `CodedThemes`
+- ✅ `UI Kit`: [Bootstrap 5](https://www.admin-dashboards.com/bootstrap-5-templates/) by `CodedThemes`
   - `Persistent` **Dark-Mode**
 - ✅ `Database`: `SQLite`, MySql
   - Silent fallback to `SQLite`  
