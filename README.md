@@ -1,7 +1,7 @@
 # [Flask Berry Bootstrap 5](https://appseed.us/product/berry-dashboard/flask/)
 
-Open-source **Flask Dashboard** project crafted on top of **[Berry](https://appseed.us/product/berry-dashboard/flask/)**, an open-source `Bootstrap 5` design from [CodedThemes](https://codedthemes.com/?ref=appseed)
-The product is designed to deliver the best possible user experience with highly customizable feature-rich pages. `Berry` has easy and intuitive responsive design whether it is viewed on retina screens or laptops.
+Open-source **[Flask Dashboard](https://appseed.us/admin-dashboards/flask/)** project crafted on top of **Berry**, an open-source `Bootstrap 5` design from `CodedThemes`.
+The product is designed to deliver the best possible user experience with highly customizable feature-rich pages. `Berry` has an easy and intuitive responsive design whether it is viewed on retina screens or laptops.
 
 - 👉 [Flask Berry](https://appseed.us/product/berry-dashboard/flask/) - `Product page`
 - 👉 [Flask Berry](https://flask-berry.onrender.com) - `LIVE Demo`
