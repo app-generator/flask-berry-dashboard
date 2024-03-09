@@ -5,25 +5,25 @@ The product is designed to deliver the best possible user experience with highly
 
 - 👉 [Flask Berry](https://appseed.us/product/berry-dashboard/flask/) - `Product page`
 - 👉 [Flask Berry](https://flask-berry.onrender.com) - `LIVE Demo`
-- 🚀 Free [Support](https://appseed.us/support/) via `Email` & `Discord`
 
 <br />
 
-> Features
+## Features
 
-- ✅ `Up-to-date dependencies`
-- ✅ `UI Kit`: [Bootstrap 5](https://www.admin-dashboards.com/bootstrap-5-templates/) by `CodedThemes`
-  - `Persistent` **Dark-Mode**
-- ✅ `Database`: `SQLite`, MySql
-  - Silent fallback to `SQLite`  
-- ✅ `DB Tools`: SQLAlchemy ORM, `Flask-Migrate`
-- ✅ `Authentication`, Session Based
-- ✅ `Docker`, Page Compression via `Flask-Minify`
-- 🚀 `Deployment` 
-  - `CI/CD` flow via `Render` - [See Video](https://youtu.be/rp-yuOJeNEs)
-  - `CDN Support` (optional)   
+> `Have questions?` Contact **[Support](https://appseed.us/support/)** (Email & Discord) provided by **AppSeed**
 
-<br />
+| Free Version                          | [PRO Version](https://appseed.us/product/berry-dashboard-pro/flask/)          | [Custom Development](https://appseed.us/custom-development/) |  
+| --------------------------------------| --------------------------------------| --------------------------------------|
+| ✓ **Up-to-date dependencies**             | **Everything in Free**, plus:                                        | **Everything in PRO**, plus:       |
+| ✓ Best Practices                          | ✅ **Premium Bootstrap 5 Design**                                    | ✅ **1mo Custom Development**     | 
+| ✓ DB: SQLite, MySql                       | ✅ **PRO Support** - [Email & Discord](https://appseed.us/support/)  | ✅ **Team**: PM, Developer, Tester        |
+| ✓ DB Tools: ORM, Flask-Migrate            | ✅ `Private REPO Access`                                             | ✅ Weekly Sprints                 |
+| ✓ Session-Based authentication            |  -                                                                    | ✅ Technical SPECS               |
+| ✓ `Docker`                                |  -                                                                    | ✅ Documentation                  |
+| ✓ `CI/CD` Flow via Render                 |  -                                                                    | ✅ **30 days Delivery Warranty**  |
+| ✓ `Free Support`                          |  -                                                                    |  -                                 |
+| ---------------------------------         | ---------------------------------                                     | ---------------------------------  |
+| ✓ [LIVE Demo](https://flask-berry.onrender.com)  | 🚀 [LIVE Demo](https://flask-berry-pro.onrender.com) `PRO` | 🛒 `Order`: **[$3,999](https://appseed.gumroad.com/l/rocket-package)** (GUMROAD) |
 
 ![Berry Bootstrap 5 - Dark-Mode ready, Open-source Template.](https://user-images.githubusercontent.com/51070104/207091062-e805b36c-663a-4a01-acb8-9c55ab914f4f.jpg)
 
