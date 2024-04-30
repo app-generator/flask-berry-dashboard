@@ -1,9 +1,43 @@
 {% extends 'layouts/base.html' %}
 
-{% block title %} Sample Page {% endblock title %}
+{% block title %} Run Sales Forecast 
+
+<!DOCTYPE html>
+<html lang="en">
+  <!-- <head>
+    <title>Run Sales Forecast</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script> slackOutput = "{{slackOutput}}"</script>
+  </head> -->
+
+{% endblock title %}
 
 {% block content %}
   <!-- [ Main Content ] start -->
+
+
+  <head>
+    <title>Run Sales Forecast</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script> slackOutput = "{{ slackOutput }}"</script>
+  </head>
+
+  <body>
+
+  <!-- <head>
+    <title>Activity Feed</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.0/css/bulma.min.css">
+  </head> -->
+
+  <!-- <body>
+    <section class="section">
+      <div class="container">
+        <h1 class="title">Blog Realtime Activity Feed!</h1>
+        <div id="events"></div>
+      </div>
+    </section> -->
+  
   <div class="pc-container">
     <div class="pc-content">
       <!-- [ breadcrumb ] start -->
@@ -12,11 +46,11 @@
           <div class="row align-items-center">
             <div class="col-md-12">
               <div class="page-header-title">
-                <h5 class="m-b-10">Sample Page</h5>
+                <h5 class="m-b-10">Run Sales Forecast</h5>
               </div>
               <ul class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item" aria-current="page">Sample Page</li>
+                <li class="breadcrumb-item" aria-current="page">Run Sales Forecast</li>
               </ul>
             </div>
           </div>
@@ -30,17 +64,35 @@
         <!-- [ sample-page ] start -->
         <div class="col-sm-12">
           <div class="card">
-            <div class="card-header">
-              <h5>Hello card</h5>
-            </div>
+            
+            <!-- onsubmit="return false" prevents a page refresh on form submission -->
+            <form action="{{url_for('salesfc_invocation')}}" id="salesfc_form" onsubmit="return false" method="post">
+              <label for="realm">Realm:</label><br>
+              <input type="text" value="temper" id="realm" name="realm"><br>
+              <label for="site">Site:</label><br>
+              <input type="text" value="pad" id="site" name="site"><br>
+              <label for="future predictions">Future Predictions:</label><br>
+              <input type="text" value="3" id="future_preds" name="future_preds"><br>
+              <label for="start date">Start Date:</label><br>
+              <input type="text" value="2024-04-29" id="start_date" name="start_date"><br>
+              <br>
+              <input type="submit" id="salesfc_submit" value="Submit">
+              <!-- <button type="submit" formaction="/index">Submit back to dashboard</button> -->
+            </form>
+
             <div class="card-body">
-              <p
+              <!-- <p
                 >"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
                 aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
                 aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-              </p>
+                cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."<br>
+              </p> -->
+              <p id="startMsg" style="display:none;">Forecast Notifications will appear below:</p>
+              <p id="salesfc_output" style="display:none;">{{ session["realm"] }}-{{ session["site"] }} started</p>
+              <p id="salesfc_update" style="display:none;">{{ session["output"] }}</p>
+              <p id="completionMsg" style="display:none;">Sales Forecast completed</p>
             </div>
+
           </div>
         </div>
         <!-- [ sample-page ] end -->
@@ -48,5 +100,83 @@
       <!-- [ Main Content ] end -->
     </div>
   </div>
-  <!-- [ Main Content ] end -->
-{% endblock content %}
+
+  
+  <script>
+
+$("#salesfc_submit").click( function()
+      {
+          // when a button is clicked, you make an Ajax call.
+          // var sessOutputVar = '{{ session["realm"] }}';
+          var slackOutputVar = '{{ slackOutput }}';
+          $('#startMsg').show();
+          $('#salesfc_output').show();
+          // display notifictaion salesfc started when the salesfc_output DOM has loaded
+          window.onload = function(){
+            document.getElementById("salesfc_output").innerHTML = slackOutputVar;
+          }
+          // $.ajax({
+          //     type: "POST",
+          //     url: '/salesfc',
+          //     success: function (resp) {
+          //         // $('#loadingImage').hide();
+          //         // document.getElementById("salesfc_output").innerHTML = slackOutputVar;
+          //         $('#salesfc_output').show();
+          //     }
+          // });
+
+          $.ajax({
+              type: "GET",
+              url: '/start_salesfc',
+              success: function (resp) {
+                  // $('#loadingImage').hide();
+                  // document.getElementById("salesfc_output").innerHTML = slackOutputVar;
+                  $('#salesfc_update').show();
+                  $('#completionMsg').show();
+                  // alert("sales forecast completed");
+              }
+          });
+      });
+
+
+  // // Set the date we're counting down to
+  // var countDownDate = new Date("Jan 5, 2030 15:37:25").getTime();
+  // var slackOutputVar = '{{ slackOutput }}';
+  
+  // // Update the count down every 1 second
+  // var x = setInterval(function() {
+  
+  //   // Get today's date and time
+  //   var now = new Date().getTime();
+      
+  //   // Find the distance between now and the count down date
+  //   var distance = countDownDate - now;
+      
+  //   // Time calculations for days, hours, minutes and seconds
+  //   var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  //   var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  //   var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  //   var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      
+  //   // Output the result in an element with id="demo"
+  //   // document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+  //   // + minutes + "m " + seconds + "s ";
+
+  //   document.getElementById("salesfc_output").innerHTML = slackOutputVar;
+
+  //   // document.getElementById("salesfc_submit").addEventListener('submit', function() {
+  //   //     window.location.href = 'pages/feed.html'; 
+  //   //   });  
+  //   }, 3000); // 3000 sets the delay period, and therefore the length of time the initial load message is shown (Forecast Notifications will appear below:)
+
+
+    
+  </script>
+  
+
+  </body>
+
+  {% endblock content %}
+
+</html>
+
