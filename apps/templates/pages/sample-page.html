@@ -7,7 +7,7 @@
   <!-- <head>
     <title>Run Sales Forecast</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script> slackOutput = "{{slackOutput}}"</script>
+    <script> sessOutput = "{{sessOutput}}"</script>
   </head> -->
 
 {% endblock title %}
@@ -19,7 +19,10 @@
   <head>
     <title>Run Sales Forecast</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script> slackOutput = "{{ slackOutput }}"</script>
+    <!-- <script>sessionOutput = "{{sessionOutput}}"</script> -->
+    <script>window.token = "{{ token }}"</script>
+    <!-- <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" /> -->
+    <!-- <script defer src="https://pyscript.net/alpha/pyscript.js"></script> -->
   </head>
 
   <body>
@@ -66,18 +69,18 @@
           <div class="card">
             
             <!-- onsubmit="return false" prevents a page refresh on form submission -->
-            <form action="{{url_for('salesfc_invocation')}}" id="salesfc_form" onsubmit="return false" method="post">
+            <form id="salesfc_form" method="post">
               <label for="realm">Realm:</label><br>
               <input type="text" value="temper" id="realm" name="realm"><br>
               <label for="site">Site:</label><br>
               <input type="text" value="pad" id="site" name="site"><br>
               <label for="future predictions">Future Predictions:</label><br>
-              <input type="text" value="3" id="future_preds" name="future_preds"><br>
+              <input type="text" value="1" id="future_preds" name="future_preds"><br>
               <label for="start date">Start Date:</label><br>
-              <input type="text" value="2024-04-29" id="start_date" name="start_date"><br>
+              <input type="text" id="start_date" name="start_date"><br>
               <br>
-              <input type="submit" id="salesfc_submit" value="Submit">
-              <!-- <button type="submit" formaction="/index">Submit back to dashboard</button> -->
+              <!-- <input type="submit" id="salesfc_submit" value="Submit"> -->
+              <button type="submit" id="salesfc_submit" >Submit job</button>
             </form>
 
             <div class="card-body">
@@ -88,8 +91,10 @@
                 cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."<br>
               </p> -->
               <p id="startMsg" style="display:none;">Forecast Notifications will appear below:</p>
-              <p id="salesfc_output" style="display:none;">{{ session["realm"] }}-{{ session["site"] }} started</p>
-              <p id="salesfc_update" style="display:none;">{{ session["output"] }}</p>
+              <p id="salesfc_started" style="display:none;"></p>
+              <p id="salesfc_update" style="display:none;">{window.token}</p> {{ session["output"] }}
+              <!-- <p>My Token = {window.token}</p> -->
+              <p id="empty_div"></p>
               <p id="completionMsg" style="display:none;">Sales Forecast completed</p>
             </div>
 
@@ -102,46 +107,230 @@
   </div>
 
   
+
+  <!-- <py-script>
+    
+    file = open("/salesfc_status.txt").readlines()
+    print(file[0])
+  
+  </py-script> -->
+
+  
+
+
   <script>
 
-$("#salesfc_submit").click( function()
-      {
+
+    // default date for forecast start
+$(document).ready(function() {
+    var date = new Date();
+
+    var day = date.getDate();
+    var month = date.getMonth() + 1;
+    var year = date.getFullYear();
+
+    if (month < 10) month = "0" + month;
+    if (day < 10) day = "0" + day;
+
+    var today = year + "-" + month + "-" + day // add for time: +"T00:00";       
+    $("#start_date").attr("value", today);
+});
+
+// load final message after sales forecast updated loaded
+// $("#salesfc_update").is(":hidden");
+// if( $('#salesfc_update:empty').length ) {
+//                 $("#completionMsg").delay(2000).fadeIn(500);
+//                 }
+
+
+// if window reloaded, add delayed sales forecast completion message
+if (window.performance) {
+  console.info("window.performance works fine on this browser");
+}
+console.info(performance.navigation.type);
+if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+  console.info( "This page is reloaded" );
+
+  setTimeout(
+                            function() 
+                            {
+                              //wait 2 secs then do this...
+                              document.getElementById('completionMsg').innerHTML = "Sales Forecast completed";
+                              $('#completionMsg').show();
+                            }, 2000);
+
+                            setTimeout(
+                            function() 
+                            {
+                              //wait another 5 secs
+                              window.location.assign("index");
+                            }, 5000);
+
+                            
+
+} else {
+  console.info( "This page is not reloaded");
+}
+// function myFunction() {
+//   if($('#completionMsg').css('display') == 'none')
+//  {
+//     alert("#completionMsg empty");
+//   } else {
+//     alert("#completionMsg NOT empty");
+//   }
+// }
+
+
+
+$("#salesfc_submit").on('click', function(e){
+
+          $('#startMsg').show();
+
           // when a button is clicked, you make an Ajax call.
           // var sessOutputVar = '{{ session["realm"] }}';
-          var slackOutputVar = '{{ slackOutput }}';
-          $('#startMsg').show();
-          $('#salesfc_output').show();
-          // display notifictaion salesfc started when the salesfc_output DOM has loaded
-          window.onload = function(){
-            document.getElementById("salesfc_output").innerHTML = slackOutputVar;
-          }
+
+          // var form_data = $('salesfc_form').serialize();
+          // // $.post('/salesfc', form_data);  
+          // $.post("{{url_for('salesfc_invocation')}}", form_data);
+
+          var realmVal = $("#realm").val();
+          var siteVal = $("#site").val();
+          var predsVal = $("#future_preds").val();
+          var startVal= $("#start_date").val();
+
+          // debug
+          // alert(`Realm : ${realmVal}`);
+
+          // $.ajax({
+          //     type: "POST",
+          //     url: '/salesfc',
+          //     data: {realm: realmVal,
+          //                 site: siteVal,
+          //                 future_preds: predsVal,
+          //                 start_date: startVal},
+          //     success: function (resp) {
+          //         console.log(resp);
+          //       },
+          //       error: function (error) {
+          //         console.log(error);
+          //       }
+          //     });
+
           // $.ajax({
           //     type: "POST",
           //     url: '/salesfc',
           //     success: function (resp) {
           //         // $('#loadingImage').hide();
-          //         // document.getElementById("salesfc_output").innerHTML = slackOutputVar;
+          //         var sessOutputVar = '{{ sessOutput }}';
+          //         document.getElementById("salesfc_output").innerHTML = sessOutputVar;
           //         $('#salesfc_output').show();
           //     }
           // });
 
+          // // display notifictaion salesfc started when the salesfc_output DOM has loaded
+          // window.onload = function(){
+          //   document.getElementById("salesfc_output").innerHTML = sessOutputVar;
+          // }
+           
+          document.getElementById('salesfc_started').innerHTML = realmVal+"-"+siteVal+" forecast started";
+          // $('#salesfc_started').show();
+          $("#startMsg").ready(function() {
+            $("#salesfc_started").delay(2000).fadeIn(500);
+            });
+          
+          // var sessionOutputVar = '{{ sessionOutput }}';
+
+          // alert(sessionOutputVar);
+
+          // window.onload = function(){
+          //   document.getElementById("salesfc_output").innerHTML = sessionOutputVar;
+          // }
+
           $.ajax({
               type: "GET",
               url: '/start_salesfc',
-              success: function (resp) {
-                  // $('#loadingImage').hide();
-                  // document.getElementById("salesfc_output").innerHTML = slackOutputVar;
-                  $('#salesfc_update').show();
-                  $('#completionMsg').show();
-                  // alert("sales forecast completed");
-              }
+              data: {realm: realmVal,
+                          site: siteVal,
+                          future_preds: predsVal,
+                          start_date: startVal},
+              success: function(resp){
+
+                // $(document).ready(function(){
+                //     $.getJSON("salesfc_status.json", function(data){
+                //         console.log(data.name); // Prints: Harry
+                //         console.log(data.age); // Prints: 14
+                //     }).fail(function(){
+                //         console.log("An error has occurred.");
+                //     });
+                // });
+
+                // $.get("salesfc_status.txt", function(data) {
+                //           console.log(data);
+                //       }, 'text');
+
+                setTimeout(
+                            function() 
+                            {
+                              window.location.reload(); // reload page to get updated status
+                              $('#salesfc_update').show(); 
+                            }, 5000);
+
+                // window.location.reload(); // reload page to get updated status
+                // pyscript.write('salesfc_update',generateRandomNumber())
+                // document.getElementById('salesfc_update').innerHTML = "{{sessionOutput}}"; /* "salesfc_status.txt"  /* "{{session['output']}}";   /* {{ session['output'] }}"; */
+                // $('#salesfc_update').show(); 
+                // const output = document.getElementById("output");
+
+// Create XHR object
+// var xhr = new XMLHttpRequest();
+
+// // Configure the request (substitute a URL
+// // to the file below)
+// xhr.open("GET", "salesfc_status.txt", false);
+
+// // Set up the callback for when the response has
+// // been recieved
+// xhr.onreadystatechange = function (){
+//  if(xhr.readyState === 4) {
+//    // Was the request successful?
+//    if(xhr.status === 200 || xhr.status == 0) {
+//      // Populate the <div> with the response text
+//      output.textContent = xhr.responseText;
+//    }
+//  }
+// }
+// xhr.send(null);  // Make the call
+
+
+
+          //       window.onload = function(){
+          //   document.getElementById("salesfc_update").innerHTML = sfcastOutputVar;
+          // }
+                
+                // ('#salesfc_update').show();
+
+                setTimeout(
+                            function() 
+                            {
+                              //wait 5 secs then do this...
+                              document.getElementById('completionMsg').innerHTML = "Sales Forecast completed";
+                              $('#completionMsg').show();
+                            }, 5000);
+
+                }
           });
+
+          e.preventDefault(); // prevent page reload    
+
       });
 
 
+
+      
+
   // // Set the date we're counting down to
   // var countDownDate = new Date("Jan 5, 2030 15:37:25").getTime();
-  // var slackOutputVar = '{{ slackOutput }}';
+  // var sessOutputVar = '{{ sessOutput }}';
   
   // // Update the count down every 1 second
   // var x = setInterval(function() {
@@ -162,7 +351,7 @@ $("#salesfc_submit").click( function()
   //   // document.getElementById("demo").innerHTML = days + "d " + hours + "h "
   //   // + minutes + "m " + seconds + "s ";
 
-  //   document.getElementById("salesfc_output").innerHTML = slackOutputVar;
+  //   document.getElementById("salesfc_output").innerHTML = sessOutputVar;
 
   //   // document.getElementById("salesfc_submit").addEventListener('submit', function() {
   //   //     window.location.href = 'pages/feed.html'; 
@@ -172,6 +361,8 @@ $("#salesfc_submit").click( function()
 
     
   </script>
+
+
   
 
   </body>
