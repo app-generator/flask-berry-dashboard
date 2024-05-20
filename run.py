@@ -28,6 +28,9 @@ from apps import create_app, db
 from apps.salesfc.inference import Inference
 import apps.salesfc.config as config
 
+from apps.analytics import quicksight_embed as qe
+from apps.analytics import bedrock_rag as rag
+
 from slack import WebClient
 
 
@@ -39,7 +42,7 @@ from modules.batch_engine import BatchEngine
 #import modules.config as config
 
 client = WebClient(token=os.environ.get("SLACK_BOT_TOKEN"))
-
+kb_id = "O3SYXISL4R" # *check* move to env. variable
 
 
 # WARNING: Don't run with debug turned on in production!
@@ -191,9 +194,9 @@ def start_salesfc(): #realm, site, future_preds, start_date):
     # with open('apps/templates/pages/salesfc_status.json', 'w', encoding='utf-8') as f:
     #     json.dump(test, f, ensure_ascii=False, indent=4)
 
-    f = open("salesfc_status.txt", "w")
-    f.write(str(batchOutput))
-    f.close()
+    # f = open("salesfc_status.txt", "w")
+    # f.write(str(batchOutput))
+    # f.close()
 
     # js.statusVar = batchOutput
 
@@ -204,6 +207,39 @@ def start_salesfc(): #realm, site, future_preds, start_date):
     # index(token = batchOutput) # reroute to index page with token
 
     return render_template('pages/sample-page.html', token = batchOutput ) #sessionOutput=f"{str(batchOutput)}")
+
+
+@app.route("/analytics", methods=['GET'])
+def analytics(): 
+
+    session["qs_url"]=qe.getDashboardURL()
+
+    print("session[qs_url]: ", session["qs_url"])
+
+    return render_template('pages/typography.html')
+
+
+@app.route("/gen_ai", methods=['GET'])
+def gen_ai(): 
+
+    # example questions:
+    #target_qu = "What are the key anomalies we are seeing in the model training process ?"
+    #target_qu = "What are the main errors we are seeing in the inference process ?"
+    #"What are the key anomalies we are seeing in the model training process ?"
+    # "can you tell me approximately how many training jobs failed within the last month with the train_size=None error and what percentage this is of all the training jobs in that period ?""
+
+    target_qu = request.args["target_qu"]
+
+    # custom responses from LLM (Anthropic) to the question posed in the last cell
+    response = rag.retrieveAndGenerate(
+        target_qu, kb_id
+    )
+
+    session["genai_resp"]= response["output"]["text"]
+
+    print("session[genai]: ", session["genai_resp"])
+
+    return render_template('pages/typography.html')
 
 
 if __name__ == "__main__":

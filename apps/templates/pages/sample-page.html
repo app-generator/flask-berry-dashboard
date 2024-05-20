@@ -27,6 +27,41 @@
 
   <body>
 
+    <script>  
+    // if window reloaded, add delayed sales forecast completion message
+if (window.performance) {
+  console.info("window.performance works fine on this browser");
+}
+console.info(performance.navigation.type);
+if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+  console.info( "This page is reloaded" );
+
+  setTimeout(
+                            function() 
+                            {
+                              //wait 2 secs then do this...
+                              document.getElementById('completionMsg').innerHTML = "Sales Forecast completed";
+                              $('#completionMsg').show();
+                            }, 2000);
+
+                            setTimeout(
+                            function() 
+                            {
+                              //wait another 5 secs then pass forecast token to index (home) page and redirect there
+                              //document.getElementById("homeMsg").setAttribute("data-sfcast", window.token);
+                              localStorage.setItem("sfcast",document.getElementById('salesfc_update').innerHTML);
+                              window.location.assign("index");
+                              
+                            }, 5000);
+
+                            
+
+} else {
+  console.info( "This page is not reloaded");
+}
+
+</script>
+
   <!-- <head>
     <title>Activity Feed</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -143,34 +178,7 @@ $(document).ready(function() {
 //                 }
 
 
-// if window reloaded, add delayed sales forecast completion message
-if (window.performance) {
-  console.info("window.performance works fine on this browser");
-}
-console.info(performance.navigation.type);
-if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
-  console.info( "This page is reloaded" );
 
-  setTimeout(
-                            function() 
-                            {
-                              //wait 2 secs then do this...
-                              document.getElementById('completionMsg').innerHTML = "Sales Forecast completed";
-                              $('#completionMsg').show();
-                            }, 2000);
-
-                            setTimeout(
-                            function() 
-                            {
-                              //wait another 5 secs
-                              window.location.assign("index");
-                            }, 5000);
-
-                            
-
-} else {
-  console.info( "This page is not reloaded");
-}
 // function myFunction() {
 //   if($('#completionMsg').css('display') == 'none')
 //  {

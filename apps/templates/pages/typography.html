@@ -1,9 +1,81 @@
 {% extends 'layouts/base.html' %}
 
-{% block title %} Typography {% endblock title %} 
+{% block title %} QuickSight Analytics 
+  
+{% endblock title %} 
 
 {% block content %}
-  <!-- [ Main Content ] start -->
+ <!-- [ Main Content ] start -->
+
+<head>
+  <title>QuickSight Analytics </title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+// script for when page reloaded (wither quicksight dashboard request or genai prompt
+  <script>  
+    // if window reloaded, add delayed sales forecast completion message
+    if (window.performance) {
+      console.info("window.performance works fine on this browser");
+    }
+    console.info(performance.navigation.type);
+    if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+      console.info( "This page is reloaded" );
+
+      // debug
+      // if('{{ session["qs_url"] }}' === '') {
+      //   alert('qs_url is blank');
+      // } else {
+      //   alert('qs_url is not blank');
+      // }
+      // // alert('{{ session["qs_url"] }}');  // debug - this works
+      
+      // if('{{ session["genai_resp"] }}' === '') {
+      //   alert('genai_resp is blank');
+      // } else {
+      //   alert('genai_resp is not blank');
+      // }
+
+      // alert('{{ session["genai_resp"] }}'); // debug - this works
+
+        setTimeout(
+                                function() 
+                                {
+                                
+                                  // if GenAI response received, then show the iframe
+                                  if('{{ session["genai_resp"] }}' !== '') {
+                                    $('#llm-out').show();
+                                  } else {
+                                    // do nothing
+                                  }
+
+                                  // if QS analytics response received, then show the iframe
+                                  if('{{ session["qs_url"] }}' !== '') {
+                                  // hide QuickSight analytics submit button after clicked
+                                  $("#qs_submit").hide();
+                                  //wait 2 secs then load this...
+                                  $('#qs-container').append($('<iframe id="qs-dash-iframe" src = {{ session["qs_url"] }} width="800" height = "400"></iframe>'));
+                                  } else {
+                                    // do nothing
+                                  }
+                                
+                                  
+                                }, 2000);
+
+                                
+                                
+  
+                                
+
+    } else {
+      console.info( "This page is not reloaded");
+    }
+
+</script> 
+
+ 
   <div class="pc-container">
     <div class="pc-content">
       <!-- [ breadcrumb ] start -->
@@ -12,13 +84,28 @@
           <div class="row align-items-center">
             <div class="col-md-12">
               <div class="page-header-title">
-                <h5 class="m-b-10">Typography</h5>
+                <h5 class="m-b-10">LDFE Diagnostics Engine</h5>
               </div>
               <ul class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item" aria-current="page">Typography</li>
+                <li class="breadcrumb-item"><a href="/">Home</a></li><br>
+                <!-- <li class="breadcrumb-item" aria-current="page">Typography</li> -->
               </ul>
-            </div>
+                <!-- <div class="col-md-4 mb-3">
+                  <div class="p-3 color-block bg-blue-100" data-clipboard-text="bg-grey-600" width="800">bg-grey-600</div>
+                </div> -->
+                <p id="empty_div"></p><br>
+                <p id="empty_div"></p>
+                  <!-- <form id="llm-in" method="post"> -->
+                      <label for="llm_qu">Ask a question: &nbsp;&nbsp;&nbsp;</label> <!-- &nbsp; is a space -->
+                          <input type="text" value="LLM Prompt" id="llm_qu" name="llm_qu" style="width: 700px;"><br>
+                          <p id="empty_div"></p>
+                          <button type="submit" id="llm_submit" name="llm_submit">Tell me...</button>
+                          <p id="empty_div"></p>
+                          <p id="llm-query"></p>
+                  <!-- </form><br> -->
+                  <p class="card-body" id="llm-out" style="display:none;">{{ session["genai_resp"] }}</p> 
+
+              </div>
           </div>
         </div>
       </div>
@@ -27,7 +114,7 @@
 
       <!-- [ Main Content ] start -->
       <div class="row">
-        <!-- [ Typography ] start -->
+        <!-- [ Typography ] start
         <div class="col-sm-12">
           <div class="card">
             <div class="card-header">
@@ -51,19 +138,28 @@
               <h6>This is a H6</h6>
             </div>
           </div>
-        </div>
+        </div> -->
         <div class="col-sm-12">
           <div class="card">
             <div class="card-header">
-              <h5>Display Headings</h5>
-            </div>
-            <div class="card-body">
-              <h1 class="display-1">Display 1</h1>
+              <h5>QuickSight Analytics</h5>
+                <p id="empty_div"></p>
+                  <button type="submit" id="qs_submit" name="qs_submit" >Load QuickSight Dashboard</button>
+                    <p id="qs-load-msg"></p>
+            <p class="card-body" id="qs-container"></p>
+              <!-- <h1 class="display-1">Display 1</h1>
               <h1 class="display-2">Display 2</h1>
               <h1 class="display-3">Display 3</h1>
               <h1 class="display-4">Display 4</h1>
               <h1 class="display-5">Display 5</h1>
-              <h1 class="display-6">Display 6</h1>
+              <h1 class="display-6">Display 6</h1> -->
+
+              <!-- <iframe
+                id="qs-dash-iframe" 
+                width="800"
+                height="500"
+                src=''
+            </iframe> -->
             </div>
           </div>
         </div>
@@ -234,5 +330,111 @@
     </div>
   </div>
   <!-- [ Main Content ] end -->
-{% endblock content %}
+
+  <script>  
+
+    // only enable button actions when webpage ready
+    $(document).ready(function(){
+
+
+      // FIRST: LLM handling when llm button pressed
+      $("#llm_submit").on('click', function(e){
+
+      // show message
+      document.getElementById("llm-query").innerHTML = "Querying RAG/LLM model...";
+      document.getElementById("llm-out").innerHTML = ""; // clear any previous LLM responses
+
+
+      // debug
+      // alert(`LLM Prompt Submitted`); 
+
+      var llmQu = $("#llm_qu").val();
+
+      $.ajax({
+              type: "GET",
+              url: '/gen_ai',
+              data: {target_qu: llmQu},
+                          success: function (resp) {
+                              // alert(`target_qu : {llm_qu}`);
+                              //   alert(`target qu transferred to flask`); 
+                                // $('#genai-iframe').show();
+
+                                // remove message and reload page after graceful 10 secs
+                                setTimeout(function(){
+                                    document.getElementById("llm-query").innerHTML = '';
+                                    // document.getElementById("llm-out").innerHTML = '{{ session["genai_resp"] }}';
+                                    // $('#llm-out').show();
+                                    window.location.reload();
+                                }, 5000);
+                              },
+                              error: function (error) {
+                                console.log(error);
+                              }
+                            })
+
+
+            });
+            
+
+      // SECOND: QuickSight analytics handling when quicksight button pressed
+      $("#qs_submit").on('click', function(e){
+      
+        
+
+        // hide button after clicked
+        $("#qs_submit").hide();
+
+        // show message
+        document.getElementById("qs-load-msg").innerHTML = "QuickSight dashboard will load shortly...";
+                  
+            // $('#qs-dash-iframe').attr('src',
+                    
+          $.ajax({
+                    type: "GET",
+                    url: '/analytics',
+                    data: {quicksight: 'yes'},
+                                success: function (resp) {
+                                      // $('#qs-dash-iframe').show();
+                            
+
+                                      // remove message and reload page after graceful 5 secs
+                                      setTimeout(function(){
+                                          document.getElementById("qs-load-msg").innerHTML = '';
+                                          window.location.reload();
+                                      }, 5000);
+                                      
+                                      
+                                      // $('#qs-container').append($('<iframe id="qs-dash-iframe" src = {{ session["qs_url"] }} width="800" height = "400"></iframe>'));
+                                      // it takes about 10-15 secs to get the QS url each time so
+                                      // wait  before loading the iframe for the QuickSight dashboard
+                                      // setTimeout(
+                                      //     function() 
+                                      //     {
+                                      //       $('#qs-container').append($('<iframe id="qs-dash-iframe" src = {{ session["qs_url"] }} width="800" height = "400"></iframe>'));
+                                      //     }, 20000);
+
+                                    },
+                                    error: function (error) {
+                                      console.log(error);
+                                    }
+                                  })
+
+          // window.location.reload(); // reload page to make sure we have the new qs dashboard url
+          
+          });
+
+      
+      
+
+
+      });
+
+      </script>
     
+  
+
+</body>
+
+{% endblock content %}
+
+</html>

@@ -9,39 +9,30 @@
       <!-- [ Main Content ] start -->
       <div class="row">
         <!-- [ sample-page ] start -->
-        <div class="col-xl-4 col-md-6">
-          <div class="card bg-secondary-dark dashnum-card text-white overflow-hidden">
-            <span class="round small"></span>
-            <span class="round big"></span>
+
+        <!-- growth chart block -->
+        <div class="col-xl-8 col-md-12">
+          <div class="card">
             <div class="card-body">
-              <div class="row">
+              <div class="row mb-3 align-items-center">
                 <div class="col">
-                  <div class="avtar avtar-lg">
-                    <i class="text-white ti ti-credit-card"></i>
-                  </div>
+                  <small>Total Growth</small>
+                  <h3>$2,324.00</h3>
                 </div>
                 <div class="col-auto">
-                  <div class="btn-group">
-                    <a
-                      type="button"
-                      class="avtar bg-secondary dropdown-toggle arrow-none"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
-                      <i class="ti ti-dots"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                      <li><button class="dropdown-item" type="button">Import Card</button></li>
-                      <li><button class="dropdown-item" type="button">Export</button></li>
-                    </ul>
-                  </div>
+                  <select class="form-select p-r-35">
+                    <option>Today</option>
+                    <option selected>This Month</option>
+                    <option>This Year</option>
+                  </select>
                 </div>
               </div>
-              <span class="text-white d-block f-34 f-w-500 my-2">{window.token} previously 1350 <i class="ti ti-arrow-up-right-circle opacity-50"></i></span>
-              <p class="mb-0 opacity-50">Forecast Prediction Here</p>
+              <div id="growthchart"></div>
             </div>
           </div>
         </div>
+
+        <!-- line chart block -->
         <div class="col-xl-4 col-md-6">
           <div class="card bg-primary-dark dashnum-card text-white overflow-hidden">
             <span class="round small"></span>
@@ -111,6 +102,8 @@
             </div>
           </div>
         </div>
+
+        <!-- short KPI cards -->
         <div class="col-xl-4 col-md-12">
           <div class="card bg-primary-dark dashnum-card dashnum-card-small text-white overflow-hidden">
             <span class="round bg-primary small"></span>
@@ -123,6 +116,11 @@
                 <div class="ms-2">
                   <h4 class="text-white mb-1">$203k <i class="ti ti-arrow-up-right-circle opacity-50"></i></h4>
                   <p class="mb-0 opacity-50 text-sm">Net Profit</p>
+                  <iframe
+                      width="200"
+                      height="100"
+                      src="https://eu-west-1.quicksight.aws.amazon.com/sn/embed/share/accounts/412738038163/dashboards/7079d88e-2103-4447-be30-050597263c13?directory_alias=rotaready-test">
+                  </iframe>   
                 </div>
               </div>
             </div>
@@ -144,26 +142,43 @@
           </div>
         </div>
 
-        <div class="col-xl-8 col-md-12">
-          <div class="card">
+
+        <div class="col-xl-4 col-md-6">
+          <div class="card bg-secondary-dark dashnum-card text-white overflow-hidden">
+            <span class="round small"></span>
+            <span class="round big"></span>
             <div class="card-body">
-              <div class="row mb-3 align-items-center">
+              <div class="row">
                 <div class="col">
-                  <small>Total Growth</small>
-                  <h3>$2,324.00</h3>
+                  <div class="avtar avtar-lg">
+                    <i class="text-white ti ti-credit-card"></i>
+                  </div>
                 </div>
                 <div class="col-auto">
-                  <select class="form-select p-r-35">
-                    <option>Today</option>
-                    <option selected>This Month</option>
-                    <option>This Year</option>
-                  </select>
+                  <div class="btn-group">
+                    <a
+                      type="button"
+                      class="avtar bg-secondary dropdown-toggle arrow-none"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      <i class="ti ti-dots"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                      <li><button class="dropdown-item" type="button">Import Card</button></li>
+                      <li><button class="dropdown-item" type="button">Export</button></li>
+                    </ul>
+                  </div>
                 </div>
               </div>
-              <div id="growthchart"></div>
+              <span class="text-white d-block f-34 f-w-500 my-2">{window.token} previously 1350 <i class="ti ti-arrow-up-right-circle opacity-50"></i></span>
+              <p class="mb-0 opacity-50">Forecast Prediction Here</p>
             </div>
           </div>
         </div>
+        
+        
+        
         <div class="col-xl-4 col-md-12">
           <div class="card">
             <div class="card-body">
