@@ -14,7 +14,10 @@
 
 <body>
 
-// script for when page reloaded (wither quicksight dashboard request or genai prompt
+// quick way to add jsx to website (for genai chatbot)
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  
+// script for when page reloaded (whether quicksight dashboard request or genai prompt)
   <script>  
     // if window reloaded, add delayed sales forecast completion message
     if (window.performance) {
@@ -56,7 +59,7 @@
                                   // hide QuickSight analytics submit button after clicked
                                   $("#qs_submit").hide();
                                   //wait 2 secs then load this...
-                                  $('#qs-container').append($('<iframe id="qs-dash-iframe" src = {{ session["qs_url"] }} width="800" height = "400"></iframe>'));
+                                  $('#qs-container').append($('<iframe id="qs-dash-iframe" src = {{ session["qs_url"] }} width="700" height = "400"></iframe>'));
                                   } else {
                                     // do nothing
                                   }
@@ -76,6 +79,7 @@
 </script> 
 
  
+<!-- GENAI DIV -->
   <div class="pc-container">
     <div class="pc-content">
       <!-- [ breadcrumb ] start -->
@@ -93,17 +97,17 @@
                 <!-- <div class="col-md-4 mb-3">
                   <div class="p-3 color-block bg-blue-100" data-clipboard-text="bg-grey-600" width="800">bg-grey-600</div>
                 </div> -->
-                <p id="empty_div"></p><br>
-                <p id="empty_div"></p>
+                <!-- <p id="empty_div"></p><br>
+                <p id="empty_div"></p> -->
                   <!-- <form id="llm-in" method="post"> -->
-                      <label for="llm_qu">Ask a question: &nbsp;&nbsp;&nbsp;</label> <!-- &nbsp; is a space -->
-                          <input type="text" value="LLM Prompt" id="llm_qu" name="llm_qu" style="width: 700px;"><br>
+                      <!-- <label for="llm_qu">Ask a question: &nbsp;&nbsp;&nbsp;</label> &nbsp; is a space -->
+                          <!-- <input type="text" value="LLM Prompt" id="llm_qu" name="llm_qu" style="width: 700px;"><br>
                           <p id="empty_div"></p>
                           <button type="submit" id="llm_submit" name="llm_submit">Tell me...</button>
                           <p id="empty_div"></p>
-                          <p id="llm-query"></p>
+                          <p id="llm-query"></p> -->
                   <!-- </form><br> -->
-                  <p class="card-body" id="llm-out" style="display:none;">{{ session["genai_resp"] }}</p> 
+                  <!-- <p class="card-body" id="llm-out" style="display:none;">{{ session["genai_resp"] }}</p>  -->
 
               </div>
           </div>
@@ -112,6 +116,7 @@
       <!-- [ breadcrumb ] end -->
 
 
+      <!-- QUICKSIGHT DIV -->
       <!-- [ Main Content ] start -->
       <div class="row">
         <!-- [ Typography ] start
@@ -163,6 +168,27 @@
             </div>
           </div>
         </div>
+        
+
+      <!-- INVOKE CHATBOT -->
+      
+      <div class="page-block">
+        <div class="row align-items-center">
+          <div class="col-md-12">
+              <iframe src="http://localhost:5173" 
+              style="width:1000px; height:300px; border: 1px solid black;"></iframe>
+          </div>
+        </div>
+      </div>
+
+      
+
+        
+      
+
+
+
+
         <div class="col-md-6">
           <div class="card">
             <div class="card-header">
