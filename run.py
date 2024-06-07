@@ -15,8 +15,8 @@ from threading import Timer
 import time
 
 from flask import Flask
-from flask import render_template, request, session
-from   flask_migrate import Migrate
+from flask import render_template, request, session, jsonify
+from flask_migrate import Migrate
 from   flask_minify  import Minify
 from   sys import exit
 
@@ -30,6 +30,8 @@ import apps.salesfc.config as config
 
 from apps.analytics import quicksight_embed as qe
 from apps.analytics import bedrock_rag as rag
+from apps.analytics import bedrock_rag_enhanced as re
+from apps.analytics import bedrock_rag_LangChain as lc
 
 from slack import WebClient
 
@@ -42,7 +44,7 @@ from modules.batch_engine import BatchEngine
 #import modules.config as config
 
 client = WebClient(token=os.environ.get("SLACK_BOT_TOKEN"))
-kb_id = "O3SYXISL4R" # *check* move to env. variable
+kb_id = "WSVBOTTJJX" # *check* move to env. variable WSVBOTTJJX for S3 version, 9PLBA6IA3M for CW version
 
 
 # WARNING: Don't run with debug turned on in production!
@@ -97,12 +99,6 @@ def index():
 def salesfc_invocation():
 
     # gather inputs
-
-    # session["realm"]=request.form["realm"]
-    # session["site"]=request.form["site"]
-    # session["future_preds"]=request.form["future_preds"]
-    # session["start_date"]=request.form["start_date"]
-
     form_df = pd.DataFrame({'realm': [request.form["realm"]],
                             'site': [request.form["site"]],
                                 'future_preds': [request.form["future_preds"]],
@@ -124,10 +120,6 @@ def start_salesfc(): #realm, site, future_preds, start_date):
     site = request.args["site"] #input_data['site'][0]
     future_preds = request.args["future_preds"] #input_data['future_preds'][0]
     start_date = request.args["start_date"] #input_data['start_date'][0]
-
-    # site = session.get("site",None)
-    # future_preds = session.get("future_preds",None)
-    # start_date = session.get("start_date",None)
 
     queue = f"ml-model-training-task-manager-{env}-jobs" # *update {env} param later
 
@@ -183,30 +175,31 @@ def start_salesfc(): #realm, site, future_preds, start_date):
     batch = BatchEngine(sqs_batches)
     batchOutput = batch.begin(notifications = True)
 
-    session["output"]=f"{str(batchOutput)}" # NB session variable must be a string to render in html
+    if isinstance(batchOutput['display_msg'], pd.DataFrame): # i.e. a prediction has been returned
 
-    print("session[output] Output: ", session["output"])
+        # *check* refactor below - too complicated
+        df = batchOutput['display_msg']
 
-    # print("session Output: ", batchOutput)
+        session["fcast_sales"]=int(df.to_dict('list')['sales'][0]) # example forecasted revenue for 1st day of forecast for coststream 1
 
-    # export status to json file
-    # test = {"name": "Harry", "age": 14}
-    # with open('apps/templates/pages/salesfc_status.json', 'w', encoding='utf-8') as f:
-    #     json.dump(test, f, ensure_ascii=False, indent=4)
+        session["output"]=f"{str(batchOutput['display_msg'])}" # NB session variable must be a string to render in html
 
-    # f = open("salesfc_status.txt", "w")
-    # f.write(str(batchOutput))
-    # f.close()
+        print("session[output] Output: ", session["output"])  
 
-    # js.statusVar = batchOutput
+        session["realm-site"]=realm + " - " + site
 
-    # localStorage.setItem('salesfc', batchOutput)
+        session["fcast_dates"]= [x.strftime('%d-%b') for x in df.loc[df['stream_id'] == '1'].to_dict('list')['time']] # example forecasted revenue list of vals for chart or use dummy example [-3, 15, 15, 35, 65, 40, 80, 25, 15, 85, 25, 75] 
+        
+        for i in df['stream_id'].unique():
 
-    # must be a GET request for the param to get passed back to html
+            # *check* for now stream_id 1 only
+            forecast_sales = df.loc[df['stream_id'] == i] [['time', 'sales']]
 
-    # index(token = batchOutput) # reroute to index page with token
+            session[f"fcast_vals_raw_{i}"]= [int(x) for x in forecast_sales.to_dict('list')['sales']] # example forecasted revenue list of vals for chart or use dummy example [-3, 15, 15, 35, 65, 40, 80, 25, 15, 85, 25, 75] 
 
-    return render_template('pages/sample-page.html', token = batchOutput ) #sessionOutput=f"{str(batchOutput)}")
+          
+
+    return render_template('pages/sample-page.html' ) 
 
 
 @app.route("/analytics", methods=['GET'])
@@ -241,7 +234,60 @@ def gen_ai():
 
     return render_template('pages/typography.html')
 
+# chatbot UI invocation of bedrock - just call the RAG function
+@app.route("/ask", methods=['GET', 'POST'])
+def ask(): 
+
+    # example questions:
+    #target_qu = "What are the key anomalies we are seeing in the model training process ?"
+    #target_qu = "What are the main errors we are seeing in the inference process ?"
+    #"What are the key anomalies we are seeing in the model training process ?"
+    # "can you tell me approximately how many training jobs failed within the last month with the train_size=None error and what percentage this is of all the training jobs in that period ?""
+
+    # target_qu = request.args["target_qu"]
+    target_qu = eval(request.data)['prompt']
+
+
+    # basic model - custom responses from LLM (Anthropic) to the question posed in the last cell
+    rag_result = rag.retrieveAndGenerate(
+        target_qu, kb_id
+    )
+
+    print(rag_result["output"]["text"]) # debug
+
+    # enhanced model - passes chunked vectors from KB to LLM for context-specific, sophisticted answer
+    # rag_e_result = re.rag_enhanced(
+    #     target_qu, kb_id
+    # )
+
+    # LangChain - recommended API for LLMs *check* but its not doing a good job and doesnt seem very context-specific
+    # lc_result = lc.LangChain(
+    #     target_qu, kb_id
+    # )
+
+
+
+    # session["genai_resp"]= response["output"]["text"]
+
+    # print("session[genai]: ", session["genai_resp"])
+
+    genai_response = {"success": True, "message": rag_result["output"]["text"]} # {"success": True, "message": lc_result}
+
+    return genai_response
+
+
+# genai chatbot route, shows genai-chatbot.html view
+@app.route('/genai-chatbot')
+def genai_chatbot():
+    return render_template('pages/genai-chatbot.html')
+
+# data for charts
+@app.route('/chart_salesfc', methods=["GET"])
+def chart_salesfc():    
+    return str(session["fcast_sales"]['sales'])
+    # return render_template('index.html', output = f"{session["fcast_sales"]['sales']}")
+
 
 if __name__ == "__main__":
-    # Start the Flask web server
-    app.run(debug=True)
+    # Start the Flask web server    
+    app.run(debug=True, port=5002)
