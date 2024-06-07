@@ -15,13 +15,13 @@
         <!-- [ sample-page ] start -->
 
         <!-- growth chart block -->
-        <div class="col-xl-8 col-md-12">
+        <div class="col-xl-8 col-md-12" id="forecast_chart" style="display: none;">
           <div class="card">
             <div class="card-body">
               <div class="row mb-3 align-items-center">
                 <div class="col">
-                  <small>Total Growth</small>
-                  <h3>$2,324.00</h3>
+                  <small>{{ session["realm-site"] }}</small>
+                  <h3>${{ session["fcast_sales"] }}</h3>
                 </div>
                 <div class="col-auto">
                   <select class="form-select p-r-35">
@@ -171,7 +171,16 @@
               </div>
               <span class="text-white d-block f-34 f-w-500 my-2">
                 <!-- {window.token} previously 1350   -->
-                {{ session["output"] }}
+                <!-- <div id="fcast_sales">{{ session["fcast_sales"] }}</div> -->
+                <!-- *check* below need to refactor in .js with a for loop for each cost stream -->
+                <div id="fcast_vals_raw_1" style="display: none;">{{ session["fcast_vals_raw_1"] }}</div>
+                <div id="fcast_vals_raw_2" style="display: none;">{{ session["fcast_vals_raw_2"] }}</div>
+                <div id="fcast_vals_raw_3" style="display: none;">{{ session["fcast_vals_raw_3"] }}</div>
+                <div id="fcast_vals_raw_4" style="display: none;">{{ session["fcast_vals_raw_4"] }}</div>
+                <div id="fcast_vals_raw_5" style="display: none;">{{ session["fcast_vals_raw_5"] }}</div>
+                <div id="fcast_dates" style="display: none;">{{ session["fcast_dates"] }}</div>
+                <!-- {{ session["output"] }} AND
+                {{ session["fcast_sales"] }} -->
                 <!-- <p id="homeMsg" style="display:none;">{window.token} previously 1350</p> -->
                   <!-- <script>localStorage.getItem("sfcast")</script> -->
                 <i class="ti ti-arrow-up-right-circle opacity-50"></i>

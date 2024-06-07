@@ -127,7 +127,7 @@ if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
               </p> -->
               <p id="startMsg" style="display:none;">Forecast Notifications will appear below:</p>
               <p id="salesfc_started" style="display:none;"></p>
-              <p id="salesfc_update" style="display:none;">{window.token}</p> {{ session["output"] }}
+              <p id="salesfc_update" style="display:none;"></p> {{ session["fcast_sales"] }}  <!-- NB *check* we really want to show coststream 1 forecast: ${{ session["fcast_sales"] }} old: {window.token} or {{ session["output"] }} -->
               <!-- <p>My Token = {window.token}</p> -->
               <p id="empty_div"></p>
               <p id="completionMsg" style="display:none;">Sales Forecast completed</p>
@@ -154,6 +154,8 @@ if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
 
 
   <script>
+
+document.getElementById("salesfc_form").style.margin = "25px"; /* *check* move to css */
 
 
     // default date for forecast start
