@@ -1,0 +1,8 @@
+html,
+body,
+#root {
+  height: 100%;
+  font-size: 14px;
+  font-family: arial, sans-serif;
+  margin: 0;
+}
