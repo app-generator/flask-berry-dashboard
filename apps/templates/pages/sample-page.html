@@ -1,9 +1,81 @@
 {% extends 'layouts/base.html' %}
 
-{% block title %} Sample Page {% endblock title %}
+{% block title %} Run Sales Forecast 
+
+<!DOCTYPE html>
+<html lang="en">
+  <!-- <head>
+    <title>Run Sales Forecast</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script> sessOutput = "{{sessOutput}}"</script>
+  </head> -->
+
+{% endblock title %}
 
 {% block content %}
   <!-- [ Main Content ] start -->
+
+
+  <head>
+    <title>Run Sales Forecast</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- <script>sessionOutput = "{{sessionOutput}}"</script> -->
+    <script>window.token = "{{ token }}"</script>
+    <!-- <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" /> -->
+    <!-- <script defer src="https://pyscript.net/alpha/pyscript.js"></script> -->
+  </head>
+
+  <body>
+
+    <script>  
+    // if window reloaded, add delayed sales forecast completion message
+if (window.performance) {
+  console.info("window.performance works fine on this browser");
+}
+console.info(performance.navigation.type);
+if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+  console.info( "This page is reloaded" );
+
+  setTimeout(
+                            function() 
+                            {
+                              //wait 2 secs then do this...
+                              document.getElementById('completionMsg').innerHTML = "Sales Forecast completed";
+                              $('#completionMsg').show();
+                            }, 2000);
+
+                            setTimeout(
+                            function() 
+                            {
+                              //wait another 5 secs then pass forecast token to index (home) page and redirect there
+                              //document.getElementById("homeMsg").setAttribute("data-sfcast", window.token);
+                              localStorage.setItem("sfcast",document.getElementById('salesfc_update').innerHTML);
+                              window.location.assign("index");
+                              
+                            }, 5000);
+
+                            
+
+} else {
+  console.info( "This page is not reloaded");
+}
+
+</script>
+
+  <!-- <head>
+    <title>Activity Feed</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.0/css/bulma.min.css">
+  </head> -->
+
+  <!-- <body>
+    <section class="section">
+      <div class="container">
+        <h1 class="title">Blog Realtime Activity Feed!</h1>
+        <div id="events"></div>
+      </div>
+    </section> -->
+  
   <div class="pc-container">
     <div class="pc-content">
       <!-- [ breadcrumb ] start -->
@@ -12,11 +84,11 @@
           <div class="row align-items-center">
             <div class="col-md-12">
               <div class="page-header-title">
-                <h5 class="m-b-10">Sample Page</h5>
+                <h5 class="m-b-10">Run Sales Forecast</h5>
               </div>
               <ul class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item" aria-current="page">Sample Page</li>
+                <li class="breadcrumb-item" aria-current="page">Run Sales Forecast</li>
               </ul>
             </div>
           </div>
@@ -30,17 +102,37 @@
         <!-- [ sample-page ] start -->
         <div class="col-sm-12">
           <div class="card">
-            <div class="card-header">
-              <h5>Hello card</h5>
-            </div>
+            
+            <!-- onsubmit="return false" prevents a page refresh on form submission -->
+            <form id="salesfc_form" method="post">
+              <label for="realm">Realm:</label><br>
+              <input type="text" value="temper" id="realm" name="realm"><br>
+              <label for="site">Site:</label><br>
+              <input type="text" value="pad" id="site" name="site"><br>
+              <label for="future predictions">Future Predictions:</label><br>
+              <input type="text" value="1" id="future_preds" name="future_preds"><br>
+              <label for="start date">Start Date:</label><br>
+              <input type="text" id="start_date" name="start_date"><br>
+              <br>
+              <!-- <input type="submit" id="salesfc_submit" value="Submit"> -->
+              <button type="submit" id="salesfc_submit" >Submit job</button>
+            </form>
+
             <div class="card-body">
-              <p
+              <!-- <p
                 >"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
                 aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
                 aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-              </p>
+                cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."<br>
+              </p> -->
+              <p id="startMsg" style="display:none;">Forecast Notifications will appear below:</p>
+              <p id="salesfc_started" style="display:none;"></p>
+              <p id="salesfc_update" style="display:none;"></p> {{ session["fcast_sales"] }}  <!-- NB *check* we really want to show coststream 1 forecast: ${{ session["fcast_sales"] }} old: {window.token} or {{ session["output"] }} -->
+              <!-- <p>My Token = {window.token}</p> -->
+              <p id="empty_div"></p>
+              <p id="completionMsg" style="display:none;">Sales Forecast completed</p>
             </div>
+
           </div>
         </div>
         <!-- [ sample-page ] end -->
@@ -48,5 +140,244 @@
       <!-- [ Main Content ] end -->
     </div>
   </div>
-  <!-- [ Main Content ] end -->
-{% endblock content %}
+
+  
+
+  <!-- <py-script>
+    
+    file = open("/salesfc_status.txt").readlines()
+    print(file[0])
+  
+  </py-script> -->
+
+  
+
+
+  <script>
+
+document.getElementById("salesfc_form").style.margin = "25px"; /* *check* move to css */
+
+
+    // default date for forecast start
+$(document).ready(function() {
+    var date = new Date();
+
+    var day = date.getDate();
+    var month = date.getMonth() + 1;
+    var year = date.getFullYear();
+
+    if (month < 10) month = "0" + month;
+    if (day < 10) day = "0" + day;
+
+    var today = year + "-" + month + "-" + day // add for time: +"T00:00";       
+    $("#start_date").attr("value", today);
+});
+
+// load final message after sales forecast updated loaded
+// $("#salesfc_update").is(":hidden");
+// if( $('#salesfc_update:empty').length ) {
+//                 $("#completionMsg").delay(2000).fadeIn(500);
+//                 }
+
+
+
+// function myFunction() {
+//   if($('#completionMsg').css('display') == 'none')
+//  {
+//     alert("#completionMsg empty");
+//   } else {
+//     alert("#completionMsg NOT empty");
+//   }
+// }
+
+
+
+$("#salesfc_submit").on('click', function(e){
+
+          $('#startMsg').show();
+
+          // when a button is clicked, you make an Ajax call.
+          // var sessOutputVar = '{{ session["realm"] }}';
+
+          // var form_data = $('salesfc_form').serialize();
+          // // $.post('/salesfc', form_data);  
+          // $.post("{{url_for('salesfc_invocation')}}", form_data);
+
+          var realmVal = $("#realm").val();
+          var siteVal = $("#site").val();
+          var predsVal = $("#future_preds").val();
+          var startVal= $("#start_date").val();
+
+          // debug
+          // alert(`Realm : ${realmVal}`);
+
+          // $.ajax({
+          //     type: "POST",
+          //     url: '/salesfc',
+          //     data: {realm: realmVal,
+          //                 site: siteVal,
+          //                 future_preds: predsVal,
+          //                 start_date: startVal},
+          //     success: function (resp) {
+          //         console.log(resp);
+          //       },
+          //       error: function (error) {
+          //         console.log(error);
+          //       }
+          //     });
+
+          // $.ajax({
+          //     type: "POST",
+          //     url: '/salesfc',
+          //     success: function (resp) {
+          //         // $('#loadingImage').hide();
+          //         var sessOutputVar = '{{ sessOutput }}';
+          //         document.getElementById("salesfc_output").innerHTML = sessOutputVar;
+          //         $('#salesfc_output').show();
+          //     }
+          // });
+
+          // // display notifictaion salesfc started when the salesfc_output DOM has loaded
+          // window.onload = function(){
+          //   document.getElementById("salesfc_output").innerHTML = sessOutputVar;
+          // }
+           
+          document.getElementById('salesfc_started').innerHTML = realmVal+"-"+siteVal+" forecast started";
+          // $('#salesfc_started').show();
+          $("#startMsg").ready(function() {
+            $("#salesfc_started").delay(2000).fadeIn(500);
+            });
+          
+          // var sessionOutputVar = '{{ sessionOutput }}';
+
+          // alert(sessionOutputVar);
+
+          // window.onload = function(){
+          //   document.getElementById("salesfc_output").innerHTML = sessionOutputVar;
+          // }
+
+          $.ajax({
+              type: "GET",
+              url: '/start_salesfc',
+              data: {realm: realmVal,
+                          site: siteVal,
+                          future_preds: predsVal,
+                          start_date: startVal},
+              success: function(resp){
+
+                // $(document).ready(function(){
+                //     $.getJSON("salesfc_status.json", function(data){
+                //         console.log(data.name); // Prints: Harry
+                //         console.log(data.age); // Prints: 14
+                //     }).fail(function(){
+                //         console.log("An error has occurred.");
+                //     });
+                // });
+
+                // $.get("salesfc_status.txt", function(data) {
+                //           console.log(data);
+                //       }, 'text');
+
+                setTimeout(
+                            function() 
+                            {
+                              window.location.reload(); // reload page to get updated status
+                              $('#salesfc_update').show(); 
+                            }, 5000);
+
+                // window.location.reload(); // reload page to get updated status
+                // pyscript.write('salesfc_update',generateRandomNumber())
+                // document.getElementById('salesfc_update').innerHTML = "{{sessionOutput}}"; /* "salesfc_status.txt"  /* "{{session['output']}}";   /* {{ session['output'] }}"; */
+                // $('#salesfc_update').show(); 
+                // const output = document.getElementById("output");
+
+// Create XHR object
+// var xhr = new XMLHttpRequest();
+
+// // Configure the request (substitute a URL
+// // to the file below)
+// xhr.open("GET", "salesfc_status.txt", false);
+
+// // Set up the callback for when the response has
+// // been recieved
+// xhr.onreadystatechange = function (){
+//  if(xhr.readyState === 4) {
+//    // Was the request successful?
+//    if(xhr.status === 200 || xhr.status == 0) {
+//      // Populate the <div> with the response text
+//      output.textContent = xhr.responseText;
+//    }
+//  }
+// }
+// xhr.send(null);  // Make the call
+
+
+
+          //       window.onload = function(){
+          //   document.getElementById("salesfc_update").innerHTML = sfcastOutputVar;
+          // }
+                
+                // ('#salesfc_update').show();
+
+                setTimeout(
+                            function() 
+                            {
+                              //wait 5 secs then do this...
+                              document.getElementById('completionMsg').innerHTML = "Sales Forecast completed";
+                              $('#completionMsg').show();
+                            }, 5000);
+
+                }
+          });
+
+          e.preventDefault(); // prevent page reload    
+
+      });
+
+
+
+      
+
+  // // Set the date we're counting down to
+  // var countDownDate = new Date("Jan 5, 2030 15:37:25").getTime();
+  // var sessOutputVar = '{{ sessOutput }}';
+  
+  // // Update the count down every 1 second
+  // var x = setInterval(function() {
+  
+  //   // Get today's date and time
+  //   var now = new Date().getTime();
+      
+  //   // Find the distance between now and the count down date
+  //   var distance = countDownDate - now;
+      
+  //   // Time calculations for days, hours, minutes and seconds
+  //   var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  //   var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  //   var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  //   var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      
+  //   // Output the result in an element with id="demo"
+  //   // document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+  //   // + minutes + "m " + seconds + "s ";
+
+  //   document.getElementById("salesfc_output").innerHTML = sessOutputVar;
+
+  //   // document.getElementById("salesfc_submit").addEventListener('submit', function() {
+  //   //     window.location.href = 'pages/feed.html'; 
+  //   //   });  
+  //   }, 3000); // 3000 sets the delay period, and therefore the length of time the initial load message is shown (Forecast Notifications will appear below:)
+
+
+    
+  </script>
+
+
+  
+
+  </body>
+
+  {% endblock content %}
+
+</html>
+

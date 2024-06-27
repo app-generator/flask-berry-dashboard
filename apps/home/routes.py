@@ -9,27 +9,27 @@ from flask_login import login_required
 from jinja2 import TemplateNotFound
 
 @blueprint.route('/index')
-@login_required
+#@#login_required
 def index():
     return render_template('pages/index.html', segment='index')
 
 @blueprint.route('/typography')
-@login_required
+#@login_required
 def typography():
     return render_template('pages/typography.html')
 
 @blueprint.route('/color')
-@login_required
+#@login_required
 def color():
     return render_template('pages/color.html')
 
 @blueprint.route('/icon-tabler')
-@login_required
+#@login_required
 def icon_tabler():
     return render_template('pages/icon-tabler.html')
 
 @blueprint.route('/sample-page')
-@login_required
+#@login_required
 def sample_page():
     return render_template('pages/sample-page.html')  
 
@@ -58,7 +58,7 @@ def password_change_done():
     return render_template('accounts/password_change_done.html')
 
 @blueprint.route('/<template>')
-@login_required
+#@login_required
 def route_template(template):
 
     try:
