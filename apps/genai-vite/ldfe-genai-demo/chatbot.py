@@ -5,7 +5,7 @@ from langchain_openai import AzureChatOpenAI
 from langchain import PromptTemplate
 
 
-apiKey = '5bebb595ea0a4ad7a657ec0682ce8745'
+apiKey = 'XXX'
 DEPLOYMENT_NAME = "gpt-35-turbo"
 
 os.environ["OPENAI_API_TYPE"] = "azure"
