@@ -1,17 +1,18 @@
 .app {
   height: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: column; /* changed from row when two GenAI divs */
+  align-items: left; /* changed from center when two GenAI divs */
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.1);
 }
 
 .app-container {
-  width: 1000px;
+  width: 1000px; /* changed from 650px when two GenAI divs */
   max-width: 100%;
   padding: 0 20px;
   text-align: center;
+
 }
 
 .spotlight__wrapper {
@@ -21,7 +22,8 @@
   max-width: 800px;
   background-color: #fff;
   margin-left: 10px; 
-  margin-right: 0px
+  margin-right: 0px;
+  flex: 1;
 }
 
 .spotlight__wrapper:hover,

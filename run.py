@@ -32,6 +32,9 @@ from apps.analytics import quicksight_embed as qe
 from apps.analytics import bedrock_rag as rag
 from apps.analytics import bedrock_rag_enhanced as re
 from apps.analytics import bedrock_rag_LangChain as lc
+from apps.analytics import openai_nlp2sql as oai
+
+from apps.analytics.recommendations import notifications as nof
 
 from slack import WebClient
 
@@ -44,7 +47,7 @@ from modules.batch_engine import BatchEngine
 #import modules.config as config
 
 client = WebClient(token=os.environ.get("SLACK_BOT_TOKEN"))
-kb_id = "WSVBOTTJJX" # *check* move to env. variable WSVBOTTJJX for S3 version, 9PLBA6IA3M for CW version
+kb_id = os.getenv("BEDROCK_KB")
 
 
 # WARNING: Don't run with debug turned on in production!
@@ -180,7 +183,8 @@ def start_salesfc(): #realm, site, future_preds, start_date):
         # *check* refactor below - too complicated
         df = batchOutput['display_msg']
 
-        session["fcast_sales"]=int(df.to_dict('list')['sales'][0]) # example forecasted revenue for 1st day of forecast for coststream 1
+        #session["fcast_sales"]=int(df.to_dict('list')['sales'][0]) # example forecasted revenue for 1st day of forecast for coststream 1
+        session["fcast_sales"] = f'Total sales forecasted: ${round(df.sales.sum())}'
 
         session["output"]=f"{str(batchOutput['display_msg'])}" # NB session variable must be a string to render in html
 
@@ -188,16 +192,31 @@ def start_salesfc(): #realm, site, future_preds, start_date):
 
         session["realm-site"]=realm + " - " + site
 
-        session["fcast_dates"]= [x.strftime('%d-%b') for x in df.loc[df['stream_id'] == '1'].to_dict('list')['time']] # example forecasted revenue list of vals for chart or use dummy example [-3, 15, 15, 35, 65, 40, 80, 25, 15, 85, 25, 75] 
+        session["fcast_dates"]= [x.strftime('%d-%b') for x in df.loc[df['stream_id'] == max(df['stream_id'])].to_dict('list')['time']] # example forecasted revenue list of vals for chart or use dummy example [-3, 15, 15, 35, 65, 40, 80, 25, 15, 85, 25, 75] 
         
+        actuals = batchOutput['actual'] # actual sales - this is all actual sales for the site, so shuld probably filter further upstream in future *check*
+
         for i in df['stream_id'].unique():
 
             # *check* for now stream_id 1 only
             forecast_sales = df.loc[df['stream_id'] == i] [['time', 'sales']]
+            filtered_actuals = actuals.loc[actuals['entity_stream'] == site + '-' + i] [['sales']]
 
             session[f"fcast_vals_raw_{i}"]= [int(x) for x in forecast_sales.to_dict('list')['sales']] # example forecasted revenue list of vals for chart or use dummy example [-3, 15, 15, 35, 65, 40, 80, 25, 15, 85, 25, 75] 
 
-          
+        # finally filter actual sales only for the forecast time period and put values in a list for html/.js redendering
+        filtered_actuals = filtered_actuals[(filtered_actuals.index>=df.time.iloc[0]) & (filtered_actuals.index<=df.time.iloc[-1])]  
+        session["actuals"]= [int(x) for x in filtered_actuals.to_dict('list')['sales']] 
+
+        # finally get notifications (possibly move this to a seprate flask route)
+        notifications = nof.getRecommendations()
+
+        # *check* refactor, we shouldnt have to split out the dictionary here, should be possible in html/.js
+        session["notification_1"]= list(notifications.values())[0]
+        session["notification_2"]= list(notifications.values())[1]
+        session["notification_3"]= list(notifications.values())[2]
+        session["notification_4"]= list(notifications.values())[3]
+        session["notification_5"]= list(notifications.values())[4]
 
     return render_template('pages/sample-page.html' ) 
 
@@ -272,6 +291,41 @@ def ask():
     # print("session[genai]: ", session["genai_resp"])
 
     genai_response = {"success": True, "message": rag_result["output"]["text"]} # {"success": True, "message": lc_result}
+
+    return genai_response
+
+
+# chatbot UI invocation of OpenAI NL to SQL
+@app.route("/askopenai", methods=['GET', 'POST'])
+def askopenai(): 
+
+    # BELOW QUESTIONS THAT SHOULD BE ANSWERABLE
+    # *check* below needs to understand fail or failed
+    
+    # query = "Hello, how are you ?"
+    # query = "How many inference jobs fail on 14th Jun 2024 ?"
+    # query = "How many inference jobs failed this morning"
+    # query = "What is the main anomaly in the data"
+    # query = "What was the main anomaly in inference jobs today"
+    # query = "What has been the main forecast error recently"
+
+    # query = "What % of jobs succeeded versus failed in the last 7 days"
+    # query = "What has been the trend in failed v. successful runs"
+
+    # target_qu = request.args["target_qu"]
+    target_qu = eval(request.data)['openaiprompt']
+
+    # basic model - custom responses from LLM (Anthropic) to the question posed in the last cell
+    openai_result = oai.main(target_qu)
+    print(openai_result) # debug
+
+    try:
+        openai_final = openai_result.to_string(index=False)
+    except:
+        openai_final = openai_result
+
+
+    genai_response = {"success": True, "message": openai_final} 
 
     return genai_response
 

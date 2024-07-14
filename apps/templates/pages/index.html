@@ -21,7 +21,7 @@
               <div class="row mb-3 align-items-center">
                 <div class="col">
                   <small>{{ session["realm-site"] }}</small>
-                  <h3>${{ session["fcast_sales"] }}</h3>
+                  <h3>{{ session["fcast_sales"] }}</h3>
                 </div>
                 <div class="col-auto">
                   <select class="form-select p-r-35">
@@ -173,11 +173,13 @@
                 <!-- {window.token} previously 1350   -->
                 <!-- <div id="fcast_sales">{{ session["fcast_sales"] }}</div> -->
                 <!-- *check* below need to refactor in .js with a for loop for each cost stream -->
+                <div id="actual_sales_raw" style="display: none;">{{ session["actuals"] }}</div>
                 <div id="fcast_vals_raw_1" style="display: none;">{{ session["fcast_vals_raw_1"] }}</div>
                 <div id="fcast_vals_raw_2" style="display: none;">{{ session["fcast_vals_raw_2"] }}</div>
                 <div id="fcast_vals_raw_3" style="display: none;">{{ session["fcast_vals_raw_3"] }}</div>
                 <div id="fcast_vals_raw_4" style="display: none;">{{ session["fcast_vals_raw_4"] }}</div>
                 <div id="fcast_vals_raw_5" style="display: none;">{{ session["fcast_vals_raw_5"] }}</div>
+                <div id="fcast_vals_raw_6" style="display: none;">{{ session["fcast_vals_raw_6"] }}</div>
                 <div id="fcast_dates" style="display: none;">{{ session["fcast_dates"] }}</div>
                 <!-- {{ session["output"] }} AND
                 {{ session["fcast_sales"] }} -->

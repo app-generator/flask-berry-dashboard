@@ -47,6 +47,7 @@
   </ul>
 </div>
 <!-- [Mobile Media Block end] -->
+ 
 <div class="ms-auto">
   <ul class="list-unstyled">
 
@@ -85,8 +86,9 @@
                 </div>
                 <div class="flex-grow-1 ms-1">
                   <span class="float-end text-muted">2 min ago</span>
-                  <h5>John Doe</h5>
-                  <p class="text-body fs-6">It is a long established fact that a reader will be distracted </p>
+                  <h5>Jen Aimi </h5>
+                  <!-- <p class="text-body fs-6">It is a long established fact that a reader will be distracted </p> -->
+                  <p class="text-body fs-6"><strong>highest hourly sales</strong> (this month): {{  session["notification_1"] }}</p>
                   <div class="badge rounded-pill bg-light-danger">Unread</div>
                   <div class="badge rounded-pill bg-light-warning">New</div>
                 </div>
@@ -99,8 +101,9 @@
                 </div>
                 <div class="flex-grow-1 ms-1">
                   <span class="float-end text-muted">3 min ago</span>
-                  <h5>Store Verification Done</h5>
-                  <p class="text-body fs-6">We have successfully received your request.</p>
+                  <h5>Most Daily Sales</h5>
+                  <!-- <p class="text-body fs-6">We have successfully received your request.</p> -->
+                  <p class="text-body fs-6">{{  session["notification_2"]}} </p>
                   <div class="badge rounded-pill bg-light-danger">Unread</div>
                 </div>
               </div>
@@ -112,8 +115,9 @@
                 </div>
                 <div class="flex-grow-1 ms-1">
                   <span class="float-end text-muted">5 min ago</span>
-                  <h5>Check Your Mail.</h5>
-                  <p class="text-body fs-6">All done! Now check your inbox as you're in for a sweet treat! </p>
+                  <h5>Highest Monthly Gain</h5>
+                  <!-- <p class="text-body fs-6">All done! Now check your inbox as you're in for a sweet treat! </p> -->
+                  <p class="text-body fs-6">{{  session["notification_3"] }} </p>
                   <button class="btn btn-sm btn-primary">Mail <i class="ti ti-brand-telegram"></i></button>
                 </div>
               </div>
@@ -125,11 +129,12 @@
                 </div>
                 <div class="flex-grow-1 ms-1">
                   <span class="float-end text-muted">8 min ago</span>
-                  <h5>John Doe</h5>
-                  <p class="text-body fs-6">Uploaded two file on &nbsp;<strong>21 Jan 2020</strong></p>
+                  <h5></h5>
+                  <!-- <p class="text-body fs-6">Uploaded two file on &nbsp;<strong>21 Jan 2020</strong></p> -->
+                  <p class="text-body fs-6""><strong>largest daily loss</strong>: {{  session["notification_4"] }} </p>
                   <div class="notification-file d-flex p-3 bg-light-secondary rounded">
                     <i class="ti ti-arrow-bar-to-down"></i>
-                    <h5 class="m-0">demo.jpg</h5>
+                    <h5 class="m-0">site.jpg</h5>
                   </div>
                 </div>
               </div>
@@ -142,8 +147,10 @@
                 <div class="flex-grow-1 ms-1">
                   <span class="float-end text-muted">10 min ago</span>
                   <h5>Joseph William</h5>
-                  <p class="text-body fs-6">It is a long established fact that a reader will be distracted </p>
-                  <div class="badge rounded-pill bg-light-success">Confirmation of Account</div>
+                  <!-- <p class="text-body fs-6">It is a long established fact that a reader will be distracted </p> -->
+                  <p class="text-body fs-6"><strong>most monthly sales</strong>: </p>{{ session["notification_5"] }}
+                  <br></br>
+                  <div class="badge rounded-pill bg-light-success">Investigate</div>
                 </div>
               </div>
             </a>
