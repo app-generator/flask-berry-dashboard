@@ -36,9 +36,9 @@ The product is designed to deliver the best possible user experience with highly
 
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy)
 
-<br /> 
+<br />
 
-## Customize with [Flask Generator](https://app-generator.dev/tools/flask-generator/)
+## `Customize` with [Flask Generator](https://app-generator.dev/tools/flask-generator/)
 
 - Access the [Flask Generator](https://app-generator.dev/tools/flask-generator/)
 - Select the preferred design
