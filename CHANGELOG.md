@@ -1,5 +1,19 @@
 # Change Log
 
+## [1.0.8] 2025-03-06
+### Changes
+
+Update RM for [App-Generator](https://app-generator.dev/) Platform
+- Update RM - Added [Flask App Generator](https://app-generator.dev/tools/flask-generator/) Link 
+  - Select the preferred design
+  - (Optional) Design Database: edit models and fields
+  - (Optional) Edit the fields for the extended user model
+  - (Optional) Enable OAuth for GitHub
+  - (Optional) Add Celery (async tasks)
+  - (Optional) Enable Dynamic Tables Module
+  - Docker Scripts
+  - Render CI/Cd Scripts
+
 ## [1.0.7] 2024-03-06
 ### Changes
 
