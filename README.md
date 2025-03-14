@@ -30,6 +30,14 @@ The product is designed to deliver the best possible user experience with highly
 
 <br />
 
+## Deploy LIVE
+
+> One-click deploy (requires already having an account).
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy)
+
+<br /> 
+
 ## Customize with [Flask Generator](https://app-generator.dev/tools/flask-generator/)
 
 - Access the [Flask Generator](https://app-generator.dev/tools/flask-generator/)
@@ -49,14 +57,6 @@ The product is designed to deliver the best possible user experience with highly
 ![Flask App Generator - User Interface for Edit the Extended User Model](https://github.com/user-attachments/assets/138b9816-4f2e-454f-84f2-7409969b8548) 
 
 <br />
-
-## Deploy LIVE
-
-> One-click deploy (requires to have already an account).
-
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy)
-
-<br /> 
 
 ---
 [Flask Berry Dashboard](https://app-generator.dev/product/berry-dashboard/flask/) - Open-Source **Flask** Starter provided by [App Generator](https://app-generator.dev)
