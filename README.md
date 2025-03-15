@@ -38,6 +38,19 @@ The product is designed to deliver the best possible user experience with highly
 
 <br />
 
+## [Flask Berry Dashboard PRO](https://app-generator.dev/product/berry-dashboard-pro/flask/)
+
+> The premium version provides more features, priority on support, and is more often updated - [Live Demo](https://flask-berry-pro.onrender.com).
+
+- **Simple, Easy-to-Extend** Codebase
+- **Berry Dashboard PRO** - Premium Design 
+- **Docker**
+- **Deployment-Ready** for Render
+
+![Flask Berry Dashboard PRO - Premium Starter crafted by App-Generator](https://github.com/user-attachments/assets/c70c75a9-3c74-4658-b3b4-662e0bb62af3)
+
+<br />
+
 ## `Customize` with [Flask Generator](https://app-generator.dev/tools/flask-generator/)
 
 - Access the [Flask Generator](https://app-generator.dev/tools/flask-generator/)
