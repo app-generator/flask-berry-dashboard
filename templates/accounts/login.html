@@ -18,16 +18,23 @@
                 </div>
               </div>
             </div>
-            <!--
+            {% if has_google %}
             <div class="d-grid">
-              <button type="button" class="btn mt-2 btn-light-primary bg-light text-muted">
-                <img src="{{ url_for('static', filename='assets/images/authentication/google-icon.svg') }}" />Sign In With Google
-              </button>
+              <a href="{{ url_for('google.login') }}" class="btn mt-2 btn-light-primary bg-light text-muted">
+                <img width="40px" src="{{ url_for('static', filename='assets/images/authentication/google-icon.svg') }}" />Sign In With Google
+              </a>
             </div>
+            {% endif %}
+            {% if has_github %}
+            <div class="d-grid">
+              <a href="{{ url_for('github.login') }}" class="btn mt-2 btn-light-primary bg-light text-muted">
+                <img width="40px" src="{{ url_for('static', filename='assets/images/authentication/github-icon.svg') }}" />Sign In With Github
+              </a>
+            </div>
+            {% endif %}
             <div class="saprator mt-3">
               <span>or</span>
             </div>
-            -->
             <h5 class="my-4 d-flex justify-content-center">
 
               {% if msg %}

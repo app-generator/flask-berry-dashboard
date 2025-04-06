@@ -10,11 +10,14 @@ from flask_login import (
     logout_user
 )
 
+from flask_dance.contrib.github import github
+from flask_dance.contrib.google import google
+
 from apps import db, login_manager
 from apps.authentication import blueprint
 from apps.authentication.forms import LoginForm, CreateAccountForm
 from apps.authentication.models import Users
-
+from apps.config import Config
 from apps.authentication.util import verify_pass
 
 
@@ -24,6 +27,26 @@ def route_default():
 
 
 # Login & Registration
+
+@blueprint.route("/github")
+def login_github():
+    """ Github login """
+    if not github.authorized:
+        return redirect(url_for("github.login"))
+
+    res = github.get("/user")
+    return redirect(url_for('home_blueprint.index'))
+
+
+@blueprint.route("/google")
+def login_google():
+    """ Google login """
+    if not google.authorized:
+        return redirect(url_for("google.login"))
+
+    res = google.get("/oauth2/v1/userinfo")
+    return redirect(url_for('home_blueprint.index'))
+
 
 @blueprint.route('/login', methods=['GET', 'POST'])
 def login():
@@ -102,6 +125,14 @@ def logout():
 
 
 # Errors
+
+@blueprint.context_processor
+def has_github():
+    return {'has_github': bool(Config.GITHUB_ID) and bool(Config.GITHUB_SECRET)}
+
+@blueprint.context_processor
+def has_google():
+    return {'has_google': bool(Config.GOOGLE_ID) and bool(Config.GOOGLE_SECRET)}
 
 @login_manager.unauthorized_handler
 def unauthorized_handler():
